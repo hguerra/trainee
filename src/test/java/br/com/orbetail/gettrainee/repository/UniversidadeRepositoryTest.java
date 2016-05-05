@@ -1,4 +1,4 @@
-package br.com.orbetail.gettrainee.model;
+package br.com.orbetail.gettrainee.repository;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,6 +12,5 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml"})
 @Transactional
-public class UsuarioRepositoryTest {
-
+public class UniversidadeRepositoryTest {
 }
