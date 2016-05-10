@@ -1,12 +1,24 @@
 package br.com.orbetail.gettrainee.model.aluno;
 
+import javax.persistence.*;
+
 /**
  * @author heitor
  * @since 05/05/16.
  */
+@Entity
+@Table(name = "COM_COMPETENCIA")
 public class Competencia {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "COM_ID")
     private Long id;
+
+    @Column(name = "COM_PALAVRA_CHAVE", length = 40, nullable = false)
     private String palavraChave;
+
+    @Column(name = "COM_DESCRICAO")
     private String descricao;
 
     /**

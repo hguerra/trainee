@@ -1,5 +1,6 @@
 package br.com.orbetail.gettrainee.model.aluno;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -7,12 +8,28 @@ import java.util.List;
  * @author heitor
  * @since 05/05/16.
  */
+@Entity
+@Table(name = "PUB_PUBLICACAO")
 public class Publicacao {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PUB_ID")
     private Long id;
+
+    @Column(name = "PUB_TITULO", nullable = false)
     private String titulo;
+
+    @Column(name = "PUB_LIVRO", length = 40, nullable = false)
     private String livro;
+
+    @Column(name = "PUB_PAGINAS", length = 20, nullable = false)
     private String paginas;
+
+    @Column(name = "PUB_ANO", nullable = false)
     private LocalDate ano;
+
+    @ElementCollection
+    @CollectionTable(name = "PUB_AUTORES")
     private List<String> autores;
 
     /**

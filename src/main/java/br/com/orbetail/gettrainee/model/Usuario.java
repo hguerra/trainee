@@ -5,6 +5,7 @@ import br.com.orbetail.gettrainee.model.security.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,13 +14,34 @@ import java.util.Set;
  * @author heitor
  * @since 05/05/16.
  */
-public abstract class Usuario implements UserDetails {
+@Entity
+@Table(name = "USR_USUARIO")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USR_ID")
     private Long id;
+
+    @Column(name = "USR_NOME", unique = true, length = 40, nullable = false)
     private String nome;
+
+    @Column(name = "USR_LOGIN", unique = true, length = 40, nullable = false)
     private String login;
+
+    @Column(name = "USR_SENHA", unique = true, length = 40, nullable = false)
     private String senha;
+
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "USR_ENDERECO")
     private Endereco endereco;
+
+    @Lob
+    @Column(name = "USR_IMAGE", nullable = false, columnDefinition = "mediumblob")
     private byte[] image;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "USR_PERFILS")
     private Set<Perfil> perfils;
 
     /**

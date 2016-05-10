@@ -1,14 +1,31 @@
 package br.com.orbetail.gettrainee.model.universidade;
 
+import javax.persistence.*;
+
 /**
  * @author heitor
  * @since 05/05/16.
  */
+@Entity
+@Table(name = "DIS_DISCIPLINA")
 public class Disciplina implements Comparable<Disciplina> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DIS_ID")
     private Long id;
+
+    @Column(name = "DIS_SEMESTRE", length = 2, nullable = false)
     private Integer semestre;
+
+    @Column(name = "DIS_NOME", unique = true, length = 50, nullable = false)
     private String nome;
+
+    @Column(name = "DIS_DESCRICAO")
     private String descricao;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "DOC_ID")
     private Docente docente;
 
     /**

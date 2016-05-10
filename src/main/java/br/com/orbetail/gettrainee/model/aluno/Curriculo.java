@@ -3,17 +3,35 @@ package br.com.orbetail.gettrainee.model.aluno;
 import br.com.orbetail.gettrainee.model.universidade.Curso;
 import br.com.orbetail.gettrainee.model.universidade.Disciplina;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
  * @author heitor
  * @since 05/05/16.
  */
+
+@Entity
+@Table(name = "CUR_CURRICULO")
 public class Curriculo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CUR_ID")
     private Long id;
+
+    @Column(name = "CUR_OBJETIVO", length = 40, nullable = false)
     private String objetivo;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "CUR_CURSOS")
     private Set<Curso> cursos;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "CUR_DISCIPLINAS_CURSADAS")
     private Set<Disciplina> disciplinasCursadas;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "CUR_EXPERIENCIAS")
     private Set<Experiencia> experiencias;
 
     /**

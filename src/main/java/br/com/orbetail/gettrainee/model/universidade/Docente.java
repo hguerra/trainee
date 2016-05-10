@@ -1,15 +1,28 @@
 package br.com.orbetail.gettrainee.model.universidade;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
  * @author heitor
  * @since 05/05/16.
  */
+@Entity
+@Table(name = "DOC_DOCENTE")
 public class Docente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DOC_ID")
     private Long id;
+
+    @Column(name = "DOC_NOME", unique = true, length = 50, nullable = false)
     private String nome;
+
+    @Column(name = "DOC_LATTES", unique = true, nullable = false)
     private String lattes;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "docente")
     private Set<Disciplina> disciplinasMinistradas;
 
     /**

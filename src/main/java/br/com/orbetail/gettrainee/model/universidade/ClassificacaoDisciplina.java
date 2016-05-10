@@ -1,13 +1,27 @@
 package br.com.orbetail.gettrainee.model.universidade;
 
+import javax.persistence.*;
+
 /**
  * @author heitor
  * @since 05/05/16.
  */
+@Entity
+@Table(name = "CLA_DIS_CLASSIFICAO_DISCIPLINA")
 public class ClassificacaoDisciplina {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CLA_DIS_ID")
     private Long id;
+
+    @Column(name = "CLA_DIS_PESO", length = 2, nullable = false)
     private Integer peso;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "CLA_DIS_DISCIPLINA", nullable = false)
     private Disciplina disciplina;
+
     /**
      * Getters and setters
      *
