@@ -1,7 +1,6 @@
 package br.com.orbetail.gettrainee.modelbuilder;
 
 import br.com.orbetail.gettrainee.model.Endereco;
-import br.com.orbetail.gettrainee.model.Universidade;
 import br.com.orbetail.gettrainee.model.Usuario;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 

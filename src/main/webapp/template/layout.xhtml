@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>GetTrainee</title>
+    </f:facet>
+    <f:facet name="middle">
+        <h:outputStylesheet library="bootstrap" name="/css/bootstrap.css"/>
+        <h:outputStylesheet library="css" name="dashboard.css"/>
+        <h:outputScript library="js" name="jquery-2.2.2.min.js"/>
+        <h:outputScript library="bootstrap" name="/js/bootstrap.js"/>
+    </f:facet>
+    <f:facet name="last">
+        <h:outputStylesheet name="css/font-awesome.css"/>
+    </f:facet>
+</h:head>
+
+<h:body>
+    <div id="site">
+        <div id="header">
+            <ui:insert name="header">
+                <ui:include src="/template/header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div id="content">
+            <div id="page-header">
+                <br/><br/>
+                <ui:insert name="page-header">
+                    <h:outputText value="Titulo Default"/>
+                </ui:insert>
+            </div>
+            <div id="menu">
+                <ui:insert name="menu">
+                    <ui:include src="/template/menu.xhtml"/>
+                </ui:insert>
+            </div>
+        </div>
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="/template/footer.xhtml"/>
+            </ui:insert>
+        </div>
+    </div>
+</h:body>
+</html>
