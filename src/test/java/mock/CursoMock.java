@@ -1,4 +1,4 @@
-package Mock;
+package mock;
 
 import br.com.orbetail.gettrainee.model.universidade.ClassificacaoDisciplina;
 import br.com.orbetail.gettrainee.model.universidade.Curso;

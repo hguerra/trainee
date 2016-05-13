@@ -6,20 +6,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <f:facet name="first">
+    <f:facet name="META">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>GetTrainee</title>
     </f:facet>
-    <f:facet name="middle">
+    <f:facet name="CSS">
         <h:outputStylesheet library="bootstrap" name="/css/bootstrap.css"/>
-        <h:outputStylesheet library="css" name="dashboard.css"/>
-        <h:outputScript library="js" name="jquery-2.2.2.min.js"/>
-        <h:outputScript library="bootstrap" name="/js/bootstrap.js"/>
-    </f:facet>
-    <f:facet name="last">
-        <h:outputStylesheet name="css/font-awesome.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
     </f:facet>
 </h:head>
 
@@ -32,9 +27,8 @@
         </div>
         <div id="content">
             <div id="page-header">
-                <br/><br/>
                 <ui:insert name="page-header">
-                    <h:outputText value="Titulo Default"/>
+                    <ui:include src="/template/banner.xhtml"/>
                 </ui:insert>
             </div>
             <div id="menu">
@@ -47,6 +41,47 @@
             <ui:insert name="footer">
                 <ui:include src="/template/footer.xhtml"/>
             </ui:insert>
+        </div>
+        <div id="load_later">
+            <!-- fonts -->
+            <h:outputStylesheet name="css/font-awesome.css"/>
+            <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+                  rel='stylesheet' type='text/css'/>
+            <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet'
+                  type='text/css'/>
+            <link href='//fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'/>
+            <!-- fonts -->
+            <!-- JS-->
+            <h:outputScript library="js" name="jquery-2.2.2.min.js"/>
+            <h:outputScript library="bootstrap" name="/js/bootstrap.js"/>
+            <h:outputScript library="js" name="responsiveslides.min.js"/>
+            <h:outputScript>
+                $ = jQuery.noConflict();
+                $(document).ready(function () {
+                    $("#slider").responsiveSlides({
+                        auto: true,
+                        nav: false,
+                        speed: 500,
+                        namespace: "callbacks",
+                        pager: true,
+                    });
+                });
+            </h:outputScript>
+            <h:outputStylesheet library="css" name="owl.carousel.css"/>
+            <h:outputScript library="js" name="owl.carousel.js"/>
+            <h:outputScript>
+                $ = jQuery.noConflict();
+                $(document).ready(function () {
+                    $("#owl-demo").owlCarousel({
+                        items: 1,
+                        lazyLoad: true,
+                        autoPlay: true,
+                        navigation: false,
+                        navigationText: false,
+                        pagination: true,
+                    });
+                });
+            </h:outputScript>
         </div>
     </div>
 </h:body>

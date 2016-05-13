@@ -1,4 +1,4 @@
-package Mock;
+package createdatabase;
 
 import br.com.orbetail.gettrainee.model.universidade.ClassificacaoDisciplina;
 import br.com.orbetail.gettrainee.model.universidade.Disciplina;
@@ -19,20 +19,54 @@ import java.util.Set;
  * @since 11/05/16.
  */
 public class ClassificacaoDisciplinaTest {
-
-
     private static EntityManager entityManager;
 
+    @Ignore
     @BeforeClass
     public static void setUp() throws Exception {
         entityManager = SpringDataUtil.getEntityManager();
     }
 
+    @Ignore
     @AfterClass
     public static void tearDown() throws Exception {
         entityManager.close();
     }
-    
+    private static void persistClassificacaoDisciplina(Integer peso, String nome,
+                                                       Integer semestre, String docenteNome, String lattes) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        Docente docente = null;
+
+        Query q = entityManager.createQuery("select d from Docente d where d.nome = :nome", Docente.class);
+        q.setParameter("nome", docenteNome);
+        try {
+            docente = (Docente) q.getSingleResult();
+        } catch (Exception e) {
+            docente = new Docente();
+        }
+        docente.setNome(docenteNome);
+        docente.setLattes(lattes);
+
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome(nome);
+        disciplina.setDescricao(nome);
+        disciplina.setSemestre(semestre);
+
+        disciplina.setDocente(docente);
+        Set<Disciplina> disciplinasMinistradas = new HashSet<>();
+        disciplinasMinistradas.add(disciplina);
+        docente.setDisciplinasMinistradas(disciplinasMinistradas);
+
+        ClassificacaoDisciplina classificacaoDisciplina = new ClassificacaoDisciplina();
+        classificacaoDisciplina.setDisciplina(disciplina);
+        classificacaoDisciplina.setPeso(peso);
+
+        entityManager.persist(classificacaoDisciplina);
+        transaction.commit();
+    }
+
     @Ignore("semestre ja persistido")
     @Test
     public void primeiroSemestreTest() {
@@ -150,38 +184,5 @@ public class ClassificacaoDisciplinaTest {
     }
 
 
-    private static void persistClassificacaoDisciplina(Integer peso, String nome,
-                                                       Integer semestre, String docenteNome, String lattes) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
 
-        Docente docente = null;
-
-        Query q = entityManager.createQuery("select d from Docente d where d.nome = :nome", Docente.class);
-        q.setParameter("nome", docenteNome);
-        try {
-            docente = (Docente) q.getSingleResult();
-        } catch (Exception e) {
-            docente = new Docente();
-        }
-        docente.setNome(docenteNome);
-        docente.setLattes(lattes);
-
-        Disciplina disciplina = new Disciplina();
-        disciplina.setNome(nome);
-        disciplina.setDescricao(nome);
-        disciplina.setSemestre(semestre);
-
-        disciplina.setDocente(docente);
-        Set<Disciplina> disciplinasMinistradas = new HashSet<>();
-        disciplinasMinistradas.add(disciplina);
-        docente.setDisciplinasMinistradas(disciplinasMinistradas);
-
-        ClassificacaoDisciplina classificacaoDisciplina = new ClassificacaoDisciplina();
-        classificacaoDisciplina.setDisciplina(disciplina);
-        classificacaoDisciplina.setPeso(peso);
-
-        entityManager.persist(classificacaoDisciplina);
-        transaction.commit();
-    }
 }

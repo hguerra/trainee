@@ -1,6 +1,6 @@
 package br.com.orbetail.gettrainee.repository;
 
-import Mock.UniversidadeMock;
+import mock.UniversidadeMock;
 import br.com.orbetail.gettrainee.model.Universidade;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.model.universidade.Curso;

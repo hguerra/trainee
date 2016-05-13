@@ -1,6 +1,6 @@
 package br.com.orbetail.gettrainee.repository;
 
-import Mock.AlunoMock;
+import mock.AlunoMock;
 import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.aluno.*;
 import br.com.orbetail.gettrainee.model.security.Perfil;
