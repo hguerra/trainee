@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <!-- Register -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-info">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">x</span></button>
+                </div>
+                <div class="modal-body real-spa">
+                    <div class="login-grids">
+                        <div class="login">
+                            <div class="login-right">
+                                <h:form>
+                                    <h3>Registrar</h3>
+                                    <h:inputText pt:placeholder="Nome"/>
+                                    <h:inputText pt:placeholder="Telefone"/>
+                                    <h:inputText pt:placeholder="E-mail"/>
+                                    <h:inputSecret pt:placeholder="Senha"/>
+
+                                    <h:commandButton value="Registre agora"/>
+
+                                </h:form>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //Register -->
+</ui:composition>

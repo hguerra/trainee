@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-info">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">x</span></button>
+                </div>
+                <div class="modal-body real-spa">
+                    <div class="login-grids">
+                        <div class="login">
+
+                            <div class="login-right">
+                                <h:form>
+                                    <h3>Login</h3>
+
+                                    <h:inputText pt:placeholder="Entre com seu e-mail"/>
+                                    <h:inputSecret pt:placeholder="Senha"/>
+
+                                    <h4><h:commandLink value="Esqueceu sua senha?"/> / <h:commandLink
+                                            value="Criar uma nova senha"/></h4>
+                                    <h:commandButton value="Entrar agora"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //login -->
+</ui:composition>
