@@ -1,4 +1,4 @@
-package mock;
+package jpqltest.mock;
 
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.security.Perfil;
@@ -9,7 +9,7 @@ import br.com.orbetail.gettrainee.modelbuilder.EnderecoBuilder;
  * @author heitor
  * @since 10/05/16.
  */
-public class AlunoMock extends UsuarioMock {
+public class EmpresaMock extends UsuarioMock {
     public Perfil getPerfil() {
         return getPerfil(Role.ROLE_ALUNO);
     }

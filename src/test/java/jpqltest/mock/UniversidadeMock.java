@@ -1,4 +1,4 @@
-package mock;
+package jpqltest.mock;
 
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.security.Perfil;

@@ -10,6 +10,11 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- BACKUP DATABASE:
+    EXPORTAR: sudo  /opt/lampp/bin/mysqldump -u root -p trainee > trainee.sql
+    IMPORTAR: sudo /opt/lampp/bin/mysql -u root -p trainee < trainee.sql
+    -->
+
     <!--base-package-->
     <context:component-scan base-package="br.com.orbetail.gettrainee"/>
 
@@ -35,7 +40,7 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <!-- Generate DDL -->
-                <property name="generateDdl" value="false"/>
+                <property name="generateDdl" value="true"/>
                 <!-- Show SQL -->
                 <property name="showSql" value="true"/>
                 <!-- DIALECT -->

@@ -29,7 +29,7 @@ public class Usuario implements UserDetails {
     @Column(name = "USR_LOGIN", unique = true, length = 40, nullable = false)
     private String login;
 
-    @Column(name = "USR_SENHA", unique = true, length = 40, nullable = false)
+    @Column(name = "USR_SENHA", length = 40, nullable = false)
     private String senha;
 
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)

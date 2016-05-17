@@ -1,10 +1,10 @@
-package createdatabase;
+package jpqltest;
 
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.modelbuilder.EmpresaBuilder;
-import mock.EmpresaMock;
+import jpqltest.mock.AlunoMock;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -35,7 +35,7 @@ public class EmpresaTest {
     @Ignore
     @Test
     public void persistEmpresa() {
-        EmpresaMock mock = new EmpresaMock();
+        AlunoMock mock = new AlunoMock();
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();

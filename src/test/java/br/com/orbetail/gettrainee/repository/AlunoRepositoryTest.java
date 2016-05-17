@@ -1,6 +1,6 @@
 package br.com.orbetail.gettrainee.repository;
 
-import mock.AlunoMock;
+import jpqltest.mock.EmpresaMock;
 import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.aluno.*;
 import br.com.orbetail.gettrainee.model.security.Perfil;
@@ -36,7 +36,7 @@ public class AlunoRepositoryTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void persistAlunoTest() throws Exception {
-        AlunoMock mock = new AlunoMock();
+        EmpresaMock mock = new EmpresaMock();
         Perfil[] perfils = {mock.getPerfil()};
         Curso[] cursos = {};
         Curriculo curriculo = null;

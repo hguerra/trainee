@@ -3,7 +3,7 @@ package br.com.orbetail.gettrainee.repository;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.modelbuilder.EmpresaBuilder;
-import mock.EmpresaMock;
+import jpqltest.mock.AlunoMock;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,7 @@ public class EmpresaRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     @Ignore
     @Test
     public void persistEmpresaTest() {
-        EmpresaMock mock = new EmpresaMock();
+        AlunoMock mock = new AlunoMock();
 
         Perfil[] perfils = {mock.getPerfil()};
         String[] espcializacao = {"Ciencia"};
@@ -76,9 +76,9 @@ public class EmpresaRepositoryTest extends AbstractTransactionalJUnit4SpringCont
 
         Set<Empresa> empresas = empresaRepository.findByEspecializacaoIn(especializacaoSet);
 
-        if (empresas == null || empresas.isEmpty())
-            fail("NOT FOUND:" + empresas);
+        if (empresas == null)
+            fail("Empty or null");
 
-        assertThat(empresas.size(), is(1));
+        assertTrue(!empresas.isEmpty());
     }
 }

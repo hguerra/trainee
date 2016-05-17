@@ -1,4 +1,4 @@
-package createdatabase;
+package jpqltest;
 
 import br.com.orbetail.gettrainee.model.universidade.ClassificacaoDisciplina;
 import br.com.orbetail.gettrainee.model.universidade.Disciplina;
