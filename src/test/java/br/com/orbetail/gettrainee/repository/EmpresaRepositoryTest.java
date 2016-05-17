@@ -1,9 +1,9 @@
 package br.com.orbetail.gettrainee.repository;
 
-import mock.EmpresaMock;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.modelbuilder.EmpresaBuilder;
+import mock.EmpresaMock;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,11 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertTrue;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.*;
 
 /**
  * @author heitor
@@ -57,5 +61,24 @@ public class EmpresaRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         empresaRepository.save(empresa);
 
         assertTrue(empresa.getId() != null);
+    }
+
+    @Test
+    public void findByCnpjTest() throws Exception {
+        Empresa empresa = empresaRepository.findByCnpj("01.263.896/0005-98");
+        assertThat(empresa.getNome(), is("INPE"));
+    }
+
+    @Test
+    public void findByEspecializacaoTest() throws Exception {
+        Set<String> especializacaoSet = new HashSet<>();
+        especializacaoSet.add("Ciencia");
+
+        Set<Empresa> empresas = empresaRepository.findByEspecializacaoIn(especializacaoSet);
+
+        if (empresas == null || empresas.isEmpty())
+            fail("NOT FOUND:" + empresas);
+
+        assertThat(empresas.size(), is(1));
     }
 }
