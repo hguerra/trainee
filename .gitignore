@@ -3,8 +3,6 @@
 .metadata
 bin/
 tmp/
-library/
-images/
 *.tmp
 *.bak
 *.swp
