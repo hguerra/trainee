@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author heitor
@@ -48,12 +46,21 @@ public class DefaultEmpresaService implements EmpresaService {
     }
 
     @Override
-    public Empresa findByCnpj(String cnpj) {
+    public List<Empresa> listarTodos() {
+        List<Empresa> empresas = new ArrayList<>();
+        for(Empresa empresa: empresaRepository.findAll()){
+            empresas.add(empresa);
+        }
+       return empresas;
+    }
+
+    @Override
+    public Empresa buscarEmpresaPorCnpj(String cnpj) {
         return empresaRepository.findByCnpj(cnpj);
     }
 
     @Override
-    public Set<Empresa> findByEspecializacao(String... especializacao) {
+    public Set<Empresa> buscarEmpresasPorEspecializacao(String... especializacao) {
         if (especializacao == null || especializacao.length == 0)
             return new HashSet<>();
 

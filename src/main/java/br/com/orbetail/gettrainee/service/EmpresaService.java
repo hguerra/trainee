@@ -2,6 +2,7 @@ package br.com.orbetail.gettrainee.service;
 
 import br.com.orbetail.gettrainee.model.Empresa;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,7 +14,9 @@ public interface EmpresaService {
 
     void excluir(Long id);
 
-    Empresa findByCnpj(String cnpj);
+    List<Empresa> listarTodos();
 
-    Set<Empresa> findByEspecializacao(String...especializacao);
+    Empresa buscarEmpresaPorCnpj(String cnpj);
+
+    Set<Empresa> buscarEmpresasPorEspecializacao(String...especializacao);
 }
