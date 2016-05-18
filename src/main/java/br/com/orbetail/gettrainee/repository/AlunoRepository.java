@@ -16,27 +16,26 @@ import java.util.List;
  */
 public interface AlunoRepository extends CrudRepository<Aluno, Long> {
 
-//    @Query("select aluno from Aluno as aluno where aluno.id = ?1")
-//    Aluno findAluno(Long id);
-//
-//    @Query("select aluno from Aluno as aluno join fetch aluno.competencias where aluno.id = ?1")
-//    Aluno findAlunoCompetenciasPropertiesAluno(Long id);
-//
-//    @Query("select aluno from Aluno as aluno join fetch all properties where aluno.id = ?1")
-//    Aluno findAllPropertiesAluno(Long id);
-//
-//    Aluno findByCpf(String cpf);
-//
-//    Aluno findByCurriculo(Curriculo curriculo);
-//
-//    @Query("select aluno from Aluno aluno inner join aluno.portifolio portifolio where portifolio = ?1")
-//    List<Aluno> findByProjeto(Projeto projeto);
-//
-//    List<Aluno> findByCompentecia(String palavraChave);
-//
-//    List<Aluno> findByGrupo(String grupo);
-//
-//    List<Aluno> findByRecomendacao(String recomendacao);
-//
-//    List<Aluno> findByRecomendacao(Integer nota);
+    @Query("select aluno from Aluno as aluno where aluno.id = ?1")
+    Aluno findAluno(Long id);
+
+    @Query("select aluno from Aluno as aluno join fetch aluno.competencias where aluno.id = ?1")
+    Aluno findAlunoFetchCompetencias(Long id);
+
+    Aluno findByCpf(String cpf);
+
+    Aluno findByCurriculo(Curriculo curriculo);
+
+    @Query("select aluno from Aluno aluno inner join aluno.portifolio portifolio where portifolio = ?1")
+    List<Aluno> findByProjeto(Projeto projeto);
+
+    @Query("select alunos " +
+            "from Aluno as alunos inner join alunos.competencias competencias " +
+            "where upper(competencias.palavraChave) like %?1%")
+    List<Aluno> findByCompentecia(String palavraChave);
+
+    @Query("select alunos " +
+            "from Aluno as alunos inner join alunos.recomendacaoes recomendacoes " +
+            "where recomendacoes.nota >= ?1")
+    List<Aluno> findByRecomendacao(Integer nota);
 }
