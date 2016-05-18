@@ -10,6 +10,7 @@ import java.util.Set;
  * @since 05/05/16.
  */
 public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
+
     Empresa findByCnpj(String cnpj);
 
     Set<Empresa> findByEspecializacaoIn(Set<String> especializacao);

@@ -19,7 +19,7 @@ public class Publicacao {
     @Column(name = "PUB_TITULO", nullable = false)
     private String titulo;
 
-    @Column(name = "PUB_LIVRO", length = 40, nullable = false)
+    @Column(name = "PUB_LIVRO", nullable = false)
     private String livro;
 
     @Column(name = "PUB_PAGINAS", length = 20, nullable = false)

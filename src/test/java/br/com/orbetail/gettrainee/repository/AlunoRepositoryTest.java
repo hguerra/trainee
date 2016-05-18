@@ -1,11 +1,12 @@
 package br.com.orbetail.gettrainee.repository;
 
-import jpqltest.mock.EmpresaMock;
+import jpqltest.mock.AlunoMock;
 import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.aluno.*;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.model.universidade.Curso;
 import br.com.orbetail.gettrainee.modelbuilder.AlunoBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml"})
 @Transactional
 public class AlunoRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
+
     @Autowired
     private AlunoRepository alunoRepository;
 
@@ -34,39 +36,56 @@ public class AlunoRepositoryTest extends AbstractTransactionalJUnit4SpringContex
         this.alunoRepository = alunoRepository;
     }
 
+
     @Test
-    public void persistAlunoTest() throws Exception {
-        EmpresaMock mock = new EmpresaMock();
-        Perfil[] perfils = {mock.getPerfil()};
-        Curso[] cursos = {};
-        Curriculo curriculo = null;
-        Projeto[] portifolio = {};
-        Competencia[] competencias = {};
-        Publicacao[] publicacoes = {};
-        Idioma[] idiomas = {};
-        Grupo[] grupos = {};
-        Recomendacao[] recomendacoes = {};
-
-        Aluno aluno = new AlunoBuilder()
-                .nome("FATEC SJC")
-                .login("fatec_sjc")
-                .senha("11")
-                .endereco(mock.getEndereco())
-                .image(mock.getImagem())
-                .comPerfils(perfils).aluno()
-                .cpf("")
-                .curriculo(curriculo)
-                .portifolio(portifolio)
-                .competencias(competencias)
-                .publicacoes(publicacoes)
-                .idiomas(idiomas)
-                .grupos(grupos)
-                .recomendacoes(recomendacoes)
-                .get();
-
-        alunoRepository.save(aluno);
-
-        assertTrue(aluno.getId() != null);
+    public void findAlunoTest() throws Exception {
 
     }
+
+    @Test
+    public void findAlunoCompetenciasPropertiesAlunoTest() throws Exception {
+
+    }
+
+    @Test
+    public void findAllPropertiesAlunoTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByCpfTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByCurriculoTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByProjetoTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByCompenteciaTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByGrupoTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByRecomendacaoTest() throws Exception {
+
+    }
+
+    @Test
+    public void findByRecomendacao1Test() throws Exception {
+
+    }
+
+
 }

@@ -11,7 +11,7 @@ import br.com.orbetail.gettrainee.modelbuilder.EnderecoBuilder;
  */
 public class EmpresaMock extends UsuarioMock {
     public Perfil getPerfil() {
-        return getPerfil(Role.ROLE_ALUNO);
+        return getPerfil(Role.ROLE_EMPRESA);
     }
 
     public Endereco getEndereco() {
@@ -25,12 +25,10 @@ public class EmpresaMock extends UsuarioMock {
                 .get();
         return endereco;
     }
+
     public byte[] getImagem() {
-        return getImagem("/home/heitor/Documentos/Desenvolvimento/Java/ideaProjects/gettrainee/src/test/resources/aluno_logo.png");
+        return getImagem("/home/heitor/Documentos/Desenvolvimento/Java/ideaProjects/gettrainee/src/test/resources" +
+                "/inpe_logo.png");
 
     }
-
-
-
-
 }

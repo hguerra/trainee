@@ -41,6 +41,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     @Query("select usuarios " +
             "from Usuario as usuarios where usuarios.endereco.pais.pais = ?1")
     List<Usuario> findByPais(String pais);
-    
+
     Set<Usuario> findByPerfilsIn(Set<Perfil> perfils);
 }

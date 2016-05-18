@@ -3,8 +3,6 @@ package br.com.orbetail.gettrainee.repository;
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.Usuario;
 import br.com.orbetail.gettrainee.model.security.Perfil;
-import jpqltest.mock.EmpresaMock;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

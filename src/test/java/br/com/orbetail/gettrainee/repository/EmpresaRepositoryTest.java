@@ -3,7 +3,7 @@ package br.com.orbetail.gettrainee.repository;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.modelbuilder.EmpresaBuilder;
-import jpqltest.mock.AlunoMock;
+import jpqltest.mock.EmpresaMock;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,7 @@ public class EmpresaRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     @Ignore
     @Test
     public void persistEmpresaTest() {
-        AlunoMock mock = new AlunoMock();
+        EmpresaMock mock = new EmpresaMock();
 
         Perfil[] perfils = {mock.getPerfil()};
         String[] espcializacao = {"Ciencia"};

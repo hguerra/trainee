@@ -4,7 +4,7 @@ import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.modelbuilder.EmpresaBuilder;
-import jpqltest.mock.AlunoMock;
+import jpqltest.mock.EmpresaMock;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -35,7 +35,7 @@ public class EmpresaTest {
     @Ignore
     @Test
     public void persistEmpresa() {
-        AlunoMock mock = new AlunoMock();
+        EmpresaMock mock = new EmpresaMock();
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
