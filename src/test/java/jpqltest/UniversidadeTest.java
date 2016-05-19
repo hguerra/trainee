@@ -38,15 +38,6 @@ public class UniversidadeTest {
         entityManager.close();
     }
 
-    @Test
-    public void findAllCursosTest() {
-        Query q = entityManager.createQuery("select cursos from Universidade universidade inner join universidade.cursos cursos", Curso
-                .class);
-
-        List<Curso> cursos = q.getResultList();
-        assertTrue(!cursos.isEmpty());
-    }
-
     @Ignore
     @Test
     public void persistFatecTest() throws Exception {
@@ -104,5 +95,15 @@ public class UniversidadeTest {
         entityManager.persist(universidade);
 
         transaction.commit();
+    }
+
+    @Ignore
+    @Test
+    public void findAllCursosTest() {
+        Query q = entityManager.createQuery("select cursos from Universidade universidade inner join universidade.cursos cursos", Curso
+                .class);
+
+        List<Curso> cursos = q.getResultList();
+        assertTrue(!cursos.isEmpty());
     }
 }

@@ -20,11 +20,6 @@ public class Aluno extends Usuario {
     private Curriculo curriculo;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "ALN_ALUNO_PROJETO", joinColumns = {@JoinColumn(name = "USR_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PRJ_ID")})
-    private Set<Projeto> portifolio;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "ALN_ALUNO_COMPETENCIA", joinColumns = {@JoinColumn(name = "USR_ID")},
             inverseJoinColumns = {@JoinColumn(name = "COM_ID")})
     private Set<Competencia> competencias;
@@ -65,14 +60,6 @@ public class Aluno extends Usuario {
 
     public void setCurriculo(Curriculo curriculo) {
         this.curriculo = curriculo;
-    }
-
-    public Set<Projeto> getPortifolio() {
-        return portifolio;
-    }
-
-    public void setPortifolio(Set<Projeto> portifolio) {
-        this.portifolio = portifolio;
     }
 
     public Set<Competencia> getCompetencias() {

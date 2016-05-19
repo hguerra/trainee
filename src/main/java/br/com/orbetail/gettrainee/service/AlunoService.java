@@ -2,7 +2,7 @@ package br.com.orbetail.gettrainee.service;
 
 import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.aluno.Curriculo;
-import br.com.orbetail.gettrainee.model.aluno.Projeto;
+import br.com.orbetail.gettrainee.model.Projeto;
 
 import java.util.List;
 

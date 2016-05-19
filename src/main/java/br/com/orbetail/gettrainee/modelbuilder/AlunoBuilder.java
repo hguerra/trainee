@@ -28,13 +28,6 @@ public class AlunoBuilder extends UsuarioBuilder {
         return this;
     }
 
-    public AlunoBuilder portifolio(Projeto... projeto) {
-        Set<Projeto> projetos = new HashSet<>();
-        Collections.addAll(projetos, projeto);
-        this.aluno.setPortifolio(projetos);
-        return this;
-    }
-
     public AlunoBuilder competencias(Competencia... competecia) {
         Set<Competencia> competencias = new HashSet<>();
         Collections.addAll(competencias, competecia);
@@ -77,6 +70,7 @@ public class AlunoBuilder extends UsuarioBuilder {
         this.aluno.setEndereco(usuario.getEndereco());
         this.aluno.setImage(usuario.getImage());
         this.aluno.setPerfils(usuario.getPerfils());
+        this.aluno.setProjetos(usuario.getProjetos());
         return aluno;
     }
 }

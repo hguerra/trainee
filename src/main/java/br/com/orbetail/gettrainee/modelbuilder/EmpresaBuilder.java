@@ -42,6 +42,7 @@ public class EmpresaBuilder extends UsuarioBuilder {
         this.empresa.setEndereco(usuario.getEndereco());
         this.empresa.setImage(usuario.getImage());
         this.empresa.setPerfils(usuario.getPerfils());
+        this.empresa.setProjetos(usuario.getProjetos());
         return this.empresa;
     }
 }

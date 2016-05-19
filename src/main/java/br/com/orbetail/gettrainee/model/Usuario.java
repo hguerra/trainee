@@ -45,6 +45,16 @@ public class Usuario implements UserDetails, Serializable {
     @JoinColumn(name = "USR_PERFILS")
     private Set<Perfil> perfils;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "USR_PROJETOS",
+            joinColumns =
+            @JoinColumn(name = "USR_ID"),
+            inverseJoinColumns =
+            @JoinColumn(name = "PRJ_ID")
+    )
+    private Set<Projeto> projetos;
+
     /**
      * SpringData
      */
@@ -150,5 +160,11 @@ public class Usuario implements UserDetails, Serializable {
         this.perfils = perfils;
     }
 
+    public Set<Projeto> getProjetos() {
+        return projetos;
+    }
 
+    public void setProjetos(Set<Projeto> projetos) {
+        this.projetos = projetos;
+    }
 }

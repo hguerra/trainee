@@ -1,10 +1,8 @@
 package br.com.orbetail.gettrainee.repository;
 
 import br.com.orbetail.gettrainee.model.Aluno;
-import br.com.orbetail.gettrainee.model.aluno.Competencia;
 import br.com.orbetail.gettrainee.model.aluno.Curriculo;
-import br.com.orbetail.gettrainee.model.aluno.Grupo;
-import br.com.orbetail.gettrainee.model.aluno.Projeto;
+import br.com.orbetail.gettrainee.model.Projeto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -26,7 +24,7 @@ public interface AlunoRepository extends CrudRepository<Aluno, Long> {
 
     Aluno findByCurriculo(Curriculo curriculo);
 
-    @Query("select aluno from Aluno aluno inner join aluno.portifolio portifolio where portifolio = ?1")
+    @Query("select aluno from Aluno aluno inner join aluno.projetos portifolio where portifolio = ?1")
     List<Aluno> findByProjeto(Projeto projeto);
 
     @Query("select alunos " +

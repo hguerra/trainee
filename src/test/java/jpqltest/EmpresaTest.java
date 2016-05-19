@@ -20,13 +20,11 @@ import javax.persistence.EntityTransaction;
 public class EmpresaTest {
     private static EntityManager entityManager;
 
-    @Ignore
     @BeforeClass
     public static void setUp() throws Exception {
         entityManager = SpringDataUtil.getEntityManager();
     }
 
-    @Ignore
     @AfterClass
     public static void tearDown() throws Exception {
         entityManager.close();

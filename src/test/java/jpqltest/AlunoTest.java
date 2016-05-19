@@ -3,7 +3,10 @@ package jpqltest;
 import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.Endereco;
+import br.com.orbetail.gettrainee.model.Projeto;
 import br.com.orbetail.gettrainee.model.aluno.*;
+import br.com.orbetail.gettrainee.model.endereco.Bairro;
+import br.com.orbetail.gettrainee.model.endereco.Rua;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 import br.com.orbetail.gettrainee.model.universidade.Curso;
 import br.com.orbetail.gettrainee.model.universidade.Disciplina;
@@ -17,10 +20,13 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,18 +37,17 @@ import static org.junit.Assert.assertTrue;
 public class AlunoTest {
     private static EntityManager entityManager;
 
-    @Ignore
     @BeforeClass
     public static void setUp() throws Exception {
         entityManager = SpringDataUtil.getEntityManager();
     }
 
-    @Ignore
     @AfterClass
     public static void tearDown() throws Exception {
         entityManager.close();
     }
 
+    @Ignore
     @Test
     public void persistHeitor() throws Exception {
         EntityTransaction transaction = entityManager.getTransaction();
@@ -104,7 +109,7 @@ public class AlunoTest {
             entityManager.persist(curriculo);
 
             /**
-             * Criar portifolio
+             * Criar projetos
              */
             Projeto projeto = new Projeto();
             projeto.setNome("GetTrainee");
@@ -171,12 +176,29 @@ public class AlunoTest {
              *
              *
              */
+            Endereco endereco = new Endereco();
+            endereco.setPais(empresa.getEndereco().getPais());
+            endereco.setEstado(empresa.getEndereco().getEstado());
+            endereco.setCidade(empresa.getEndereco().getCidade());
+
+            Bairro bairro = new Bairro();
+            bairro.setBairro("Bosque dos Eucaliptos");
+
+            Rua rua = new Rua();
+            rua.setRua("Rua Cruzeiro");
+
+            endereco.setBairro(bairro);
+            endereco.setRua(rua);
+            endereco.setNumero("224");
+
+            entityManager.persist(endereco);
+
+
             AlunoMock mock = new AlunoMock();
             String cpf = "42198627817";
             String nome = "Heitor Guerra Carneiro";
             String login = "heitor";
             String senha = "11";
-            Endereco endereco = empresa.getEndereco();
             Perfil[] perfils = {mock.getPerfil()};
 
             Aluno aluno = new AlunoBuilder()
@@ -185,10 +207,10 @@ public class AlunoTest {
                     .senha(senha)
                     .endereco(endereco)
                     .image(mock.getImagem())
-                    .comPerfils(perfils).aluno()
+                    .comPerfils(perfils)
+                    .projetos(portifolio).aluno()
                     .cpf(cpf)
                     .curriculo(curriculo)
-                    .portifolio(portifolio)
                     .competencias(competencias)
                     .publicacoes(publicacoes)
                     .idiomas(idiomas)
@@ -199,6 +221,40 @@ public class AlunoTest {
             entityManager.persist(aluno);
             transaction.commit();
             assertTrue(aluno.getId() != null);
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive())
+                transaction.rollback();
+        }
+    }
+
+    @Ignore
+    @Test
+    public void addNovoProjetoAluno() {
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+            TypedQuery queryAluno = entityManager.createQuery("select a from Aluno a where a.cpf = :cpf", Aluno.class);
+            queryAluno.setParameter("cpf", "42198627817");
+
+            Aluno aluno = (Aluno) queryAluno.getSingleResult();
+
+            /**
+             * Criar projetos
+             */
+            Projeto projeto = new Projeto();
+            projeto.setNome("GetTrainee");
+            projeto.setDescricao("Projeto Interdisciplinar FATEC");
+            projeto.setDataInicio(LocalDate.of(2016, Month.FEBRUARY, 17));
+            projeto.setDatatermino(LocalDate.of(2016, Month.JUNE, 14));
+
+            Set<Projeto> projetos = new HashSet<>();
+            projetos.add(projeto);
+
+            aluno.setProjetos(projetos);
+
+
+            transaction.commit();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive())
                 transaction.rollback();

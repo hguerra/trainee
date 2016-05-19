@@ -1,6 +1,7 @@
 package br.com.orbetail.gettrainee.modelbuilder;
 
 import br.com.orbetail.gettrainee.model.Endereco;
+import br.com.orbetail.gettrainee.model.Projeto;
 import br.com.orbetail.gettrainee.model.Usuario;
 import br.com.orbetail.gettrainee.model.security.Perfil;
 
@@ -48,6 +49,13 @@ public abstract class UsuarioBuilder {
         Set<Perfil> perfils = new HashSet<>();
         Collections.addAll(perfils, perfil);
         this.usuario.setPerfils(perfils);
+        return this;
+    }
+
+    public UsuarioBuilder projetos(Projeto... projeto) {
+        Set<Projeto> projetos = new HashSet<>();
+        Collections.addAll(projetos, projeto);
+        this.usuario.setProjetos(projetos);
         return this;
     }
 

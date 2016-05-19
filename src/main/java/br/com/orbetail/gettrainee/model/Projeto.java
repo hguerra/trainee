@@ -1,7 +1,8 @@
-package br.com.orbetail.gettrainee.model.aluno;
+package br.com.orbetail.gettrainee.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * @author heitor
@@ -26,6 +27,9 @@ public class Projeto {
 
     @Column(name = "PRJ_DATA_TERMINO", nullable = false)
     private LocalDate datatermino;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projetos")
+    private Set<Usuario> usuarios;
 
     /**
      * Getters and setters
@@ -70,5 +74,13 @@ public class Projeto {
 
     public void setDatatermino(LocalDate datatermino) {
         this.datatermino = datatermino;
+    }
+
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

@@ -70,7 +70,7 @@ public class UniversidadeRepositoryTest extends AbstractTransactionalJUnit4Sprin
 
     @Test
     public void findAllCursosTest() throws Exception {
-        List<Curso> cursos = universidadeRepository.findAllCursos(9L);
+        List<Curso> cursos = universidadeRepository.findAllCursos(2L);
         if(cursos == null)
             fail("Empty or null");
         assertTrue(!cursos.isEmpty());

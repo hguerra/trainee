@@ -1,8 +1,8 @@
 package br.com.orbetail.gettrainee.repository;
 
 import br.com.orbetail.gettrainee.model.Aluno;
+import br.com.orbetail.gettrainee.model.Projeto;
 import br.com.orbetail.gettrainee.model.aluno.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class AlunoRepositoryTest extends AbstractTransactionalJUnit4SpringContex
     private static final String ALUNO_USERNAME = "heitor";
     private static final String ALUNO_SENHA = "11";
     private static final String ALUNO_CPF = "42198627817";
-    private static final Long ALUNO_ID = 12L;
+    private static final Long ALUNO_ID = 3L;
 
     @Autowired
     private AlunoRepository alunoRepository;

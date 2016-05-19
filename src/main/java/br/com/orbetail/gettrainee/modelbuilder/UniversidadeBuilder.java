@@ -37,6 +37,7 @@ public class UniversidadeBuilder extends UsuarioBuilder {
         this.universidade.setEndereco(usuario.getEndereco());
         this.universidade.setImage(usuario.getImage());
         this.universidade.setPerfils(usuario.getPerfils());
+        this.universidade.setProjetos(usuario.getProjetos());
         return universidade;
     }
 }
