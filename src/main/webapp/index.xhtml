@@ -6,29 +6,38 @@
 
     <ui:define name="menu">
         <h:form id="formProjetos">
-            <h:dataTable id="tabelaProjetos" value="#{projetoController.projetosEmAbertosNovos}"
+            <p:dataTable id="tabelaProjetos" value="#{projetoController.projetosEmAbertosNovos}"
                          var="projeto" border="1">
-                <h:column>
+                <p:column>
                     <f:facet name="header">
                         Nome
                     </f:facet>
                     #{projeto.nome}
-                </h:column>
+                </p:column>
 
-                <h:column>
+                <p:column>
                     <f:facet name="header">
                         Descrição
                     </f:facet>
                     #{projeto.descricao}
-                </h:column>
+                </p:column>
 
-                <h:column>
+                <p:column>
                     <f:facet name="header">
-                        Data Inicio
+                        Data Início
                     </f:facet>
                     #{projeto.dataInicio}
-                </h:column>
-            </h:dataTable>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        Teste de botoes
+                    </f:facet>
+                    <p:commandButton value="Edit" icon="fa fa-fw fa-edit" type="button"/>
+                    <p:commandButton value="Remove" icon="fa fa-fw fa-remove" type="button"/>
+                    <p:commandButton value="Download" icon="fa fa-fw fa-download" type="button"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>
