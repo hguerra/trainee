@@ -24,7 +24,7 @@ public class Usuario implements UserDetails, Serializable {
     @Column(name = "USR_ID")
     private Long id;
 
-    @Column(name = "USR_NOME", unique = true, length = 40, nullable = false)
+    @Column(name = "USR_NOME", length = 40, nullable = false)
     private String nome;
 
     @Column(name = "USR_LOGIN", unique = true, length = 40, nullable = false)

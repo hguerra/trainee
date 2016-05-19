@@ -8,34 +8,54 @@
         <h:form id="formProjetos">
             <p:dataTable id="tabelaProjetos" value="#{projetoController.projetosEmAbertosNovos}"
                          var="projeto" border="1">
-                <p:column>
+                <p:column style="text-align: center">
                     <f:facet name="header">
                         Nome
                     </f:facet>
                     #{projeto.nome}
                 </p:column>
 
-                <p:column>
+                <p:column style="text-align: center">
                     <f:facet name="header">
                         Descrição
                     </f:facet>
                     #{projeto.descricao}
                 </p:column>
 
-                <p:column>
+                <p:column style="text-align: center">
                     <f:facet name="header">
                         Data Início
                     </f:facet>
                     #{projeto.dataInicio}
                 </p:column>
 
-                <p:column>
+                <p:column style="text-align: center">
                     <f:facet name="header">
                         Teste de botoes
                     </f:facet>
                     <p:commandButton value="Edit" icon="fa fa-fw fa-edit" type="button"/>
                     <p:commandButton value="Remove" icon="fa fa-fw fa-remove" type="button"/>
                     <p:commandButton value="Download" icon="fa fa-fw fa-download" type="button"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:dataTable id="tabelaUsuarios" value="#{usuarioController.usuarios}"
+                         var="usuario" border="1">
+                <p:column style="text-align: center">
+                    <f:facet name="header">
+                        Nome
+                    </f:facet>
+                    #{usuario.nome}
+                </p:column>
+
+                <p:column style="text-align: center">
+                    <f:facet name="header">
+                        Imagem
+                    </f:facet>
+
+                    <p:graphicImage value="#{usuarioController.image}">
+                        <f:param name="usuarioNome" value="#{usuario.nome}" />
+                    </p:graphicImage>
                 </p:column>
             </p:dataTable>
         </h:form>

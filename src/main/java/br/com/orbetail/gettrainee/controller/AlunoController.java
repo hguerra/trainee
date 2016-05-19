@@ -39,4 +39,5 @@ public class AlunoController {
         alunos = alunoService.listarTodos();
         return alunos;
     }
+
 }
