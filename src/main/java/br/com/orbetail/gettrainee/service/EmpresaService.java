@@ -10,9 +10,12 @@ import java.util.Set;
  * @since 17/05/16.
  */
 public interface EmpresaService {
+
     Empresa salvar(Empresa empresa);
 
     void excluir(Long id);
+
+    Empresa buscarEmpresaPorId(Long id);
 
     List<Empresa> listarTodos();
 

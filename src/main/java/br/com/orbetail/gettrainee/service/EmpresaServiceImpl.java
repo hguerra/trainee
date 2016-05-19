@@ -16,7 +16,7 @@ import java.util.*;
  */
 
 @Service("empresaService")
-public class DefaultEmpresaService implements EmpresaService {
+public class EmpresaServiceImpl implements EmpresaService {
     private EmpresaRepository empresaRepository;
 
     /**
@@ -43,6 +43,11 @@ public class DefaultEmpresaService implements EmpresaService {
     @Override
     public void excluir(Long id) {
         empresaRepository.delete(id);
+    }
+
+    @Override
+    public Empresa buscarEmpresaPorId(Long id) {
+        return empresaRepository.findById(id);
     }
 
     @Override

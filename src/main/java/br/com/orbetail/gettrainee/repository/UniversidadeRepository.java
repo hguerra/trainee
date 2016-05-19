@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface UniversidadeRepository extends CrudRepository<Universidade, Long> {
 
+    Universidade findById(Long id);
+
     Universidade findByCnpj(String cnpj);
 
     @Query("select cursos from Universidade universidade inner join universidade.cursos cursos where universidade.id " +

@@ -32,7 +32,7 @@ public class UsuarioRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     private static final String EMPRESA_NOME  = "INPE";
     private static final String EMPRESA_USERNAME  = "inpe";
     private static final String EMPRESA_SENHA  = "11";
-    private static final String EMPRESA_RUA  = "Av. dos Astronautas";
+    private static final String EMPRESA_RUA  = "Av. dos Astronautas".toUpperCase();
 
     @Autowired
     private UsuarioRepository usuarioRepository;

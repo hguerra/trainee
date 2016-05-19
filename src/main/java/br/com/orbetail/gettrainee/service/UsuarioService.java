@@ -14,8 +14,6 @@ import java.util.Set;
  */
 public interface UsuarioService {
 
-    Usuario buscarUsuarioPorId(Long id);
-
     Usuario buscarUsuarioPorNome(String nome);
 
     Usuario realizarLogin(String login, String senha);

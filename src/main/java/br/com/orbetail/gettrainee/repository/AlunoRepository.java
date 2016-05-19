@@ -14,8 +14,7 @@ import java.util.List;
  */
 public interface AlunoRepository extends CrudRepository<Aluno, Long> {
 
-    @Query("select aluno from Aluno as aluno where aluno.id = ?1")
-    Aluno findAluno(Long id);
+    Aluno findById(Long id);
 
     @Query("select aluno from Aluno as aluno join fetch aluno.competencias where aluno.id = ?1")
     Aluno findAlunoFetchCompetencias(Long id);

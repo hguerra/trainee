@@ -16,10 +16,11 @@ import java.util.TreeMap;
  * @since 18/05/16.
  */
 public class ValidadorCollection {
-    public static final Validador<List> list = list -> list != null
+    public static final Validador<String> isStringNotNullOrEmpty = string -> string != null && !string.isEmpty();
+    public static final Validador<List> isListNotNullOrEmpty = list -> list != null
             && !list.isEmpty();
     public static final Validador<Object> isNull = object -> object == null;
-    public static final Validador<Object> notNull = object -> object != null;
+    public static final Validador<Object> isNotNull = object -> object != null;
 
     // SearchWord
     public static Integer search(String word, String text) {
@@ -29,7 +30,7 @@ public class ValidadorCollection {
         return result;
     }
 
-    private static List<String> asList(String text) {
+    public static List<String> asList(String text) {
         return Arrays.asList(text.split(" "));
     }
 

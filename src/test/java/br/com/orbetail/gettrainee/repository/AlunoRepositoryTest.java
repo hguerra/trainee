@@ -59,7 +59,7 @@ public class AlunoRepositoryTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void findAlunoTest() throws Exception {
-        Aluno aluno = alunoRepository.findAluno(ALUNO_ID);
+        Aluno aluno = alunoRepository.findById(ALUNO_ID);
         assertThat(aluno.getNome(), is(ALUNO_NOME));
     }
 
