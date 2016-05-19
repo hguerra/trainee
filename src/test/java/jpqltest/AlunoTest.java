@@ -115,7 +115,7 @@ public class AlunoTest {
             projeto.setNome("GetTrainee");
             projeto.setDescricao("Projeto Interdisciplinar FATEC");
             projeto.setDataInicio(LocalDate.of(2016, Month.FEBRUARY, 17));
-            projeto.setDatatermino(LocalDate.of(2016, Month.JUNE, 14));
+            projeto.setDataTermino(LocalDate.of(2016, Month.JUNE, 14));
 
             Projeto[] portifolio = {projeto};
             /**
@@ -246,7 +246,6 @@ public class AlunoTest {
             projeto.setNome("GetTrainee");
             projeto.setDescricao("Projeto Interdisciplinar FATEC");
             projeto.setDataInicio(LocalDate.of(2016, Month.FEBRUARY, 17));
-            projeto.setDatatermino(LocalDate.of(2016, Month.JUNE, 14));
 
             Set<Projeto> projetos = new HashSet<>();
             projetos.add(projeto);
@@ -254,6 +253,27 @@ public class AlunoTest {
             aluno.setProjetos(projetos);
 
 
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive())
+                transaction.rollback();
+        }
+    }
+
+    @Ignore
+    @Test
+    public void editarProjeto() {
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+            TypedQuery<Projeto> queryProjeto = entityManager.createQuery("select p from Projeto p", Projeto.class);
+            List<Projeto> projetos = queryProjeto.getResultList();
+
+            for (Projeto p : projetos) {
+                p.setDataTermino(null);
+                entityManager.merge(p);
+            }
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive())

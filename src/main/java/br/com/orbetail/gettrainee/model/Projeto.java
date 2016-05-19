@@ -25,8 +25,8 @@ public class Projeto {
     @Column(name = "PRJ_DATA_INICIO", nullable = false)
     private LocalDate dataInicio;
 
-    @Column(name = "PRJ_DATA_TERMINO", nullable = false)
-    private LocalDate datatermino;
+    @Column(name = "PRJ_DATA_TERMINO")
+    private LocalDate dataTermino;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projetos")
     private Set<Usuario> usuarios;
@@ -68,12 +68,12 @@ public class Projeto {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDatatermino() {
-        return datatermino;
+    public LocalDate getDataTermino() {
+        return dataTermino;
     }
 
-    public void setDatatermino(LocalDate datatermino) {
-        this.datatermino = datatermino;
+    public void setDataTermino(LocalDate dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
     public Set<Usuario> getUsuarios() {
