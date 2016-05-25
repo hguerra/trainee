@@ -26,7 +26,7 @@
                     <f:facet name="header">
                         Data Início
                     </f:facet>
-                    #{projeto.dataInicio}
+                    #{projeto.getDataFormatada(projeto.dataInicio)}
                 </p:column>
 
                 <p:column style="text-align: center">
@@ -54,7 +54,7 @@
                     </f:facet>
 
                     <p:graphicImage value="#{usuarioController.image}">
-                        <f:param name="usuarioNome" value="#{usuario.nome}" />
+                        <f:param name="usuarioNome" value="#{usuario.nome}"/>
                     </p:graphicImage>
                 </p:column>
             </p:dataTable>

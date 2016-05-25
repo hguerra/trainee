@@ -1,7 +1,9 @@
 package br.com.orbetail.gettrainee.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "PRJ_PROJETO")
-public class Projeto {
+public class Projeto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRJ_ID")
@@ -30,6 +32,9 @@ public class Projeto {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projetos")
     private Set<Usuario> usuarios;
+
+    @Transient
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Getters and setters
@@ -82,5 +87,9 @@ public class Projeto {
 
     public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public String getDataFormatada(LocalDate data) {
+        return data.format(formatter);
     }
 }
