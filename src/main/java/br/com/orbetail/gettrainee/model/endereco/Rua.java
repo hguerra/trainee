@@ -1,11 +1,6 @@
 package br.com.orbetail.gettrainee.model.endereco;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author heitor
@@ -19,8 +14,12 @@ public class Rua {
     @Column(name = "RU_ID")
     private Long id;
 
-    @Column(name = "RU_RUA", unique = true, length = 40, nullable = false)
+    @Column(name = "RU_RUA", length = 40, nullable = false)
     private String rua;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "RU_BAIRRO", nullable = false)
+    private Bairro bairro;
 
     /**
      * Getters and setters
@@ -41,5 +40,13 @@ public class Rua {
 
     public void setRua(String rua) {
         this.rua = rua;
+    }
+
+    public Bairro getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
     }
 }

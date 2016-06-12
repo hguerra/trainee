@@ -108,8 +108,10 @@ DROP TABLE IF EXISTS `BAI_BAIRRO`;
 CREATE TABLE `BAI_BAIRRO` (
   `BAI_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BAI_BAIRRO` varchar(40) NOT NULL,
+  `BAI_CIDADE` bigint(20) NOT NULL,
   PRIMARY KEY (`BAI_ID`),
-  UNIQUE KEY `UK_mt75mcshrdvj2w6y4onikg9q2` (`BAI_BAIRRO`)
+  KEY `FKod978g0qhd4qyl1j3b99psq6q` (`BAI_CIDADE`),
+  CONSTRAINT `FKod978g0qhd4qyl1j3b99psq6q` FOREIGN KEY (`BAI_CIDADE`) REFERENCES `CID_CIDADE` (`CID_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,7 +121,7 @@ CREATE TABLE `BAI_BAIRRO` (
 
 LOCK TABLES `BAI_BAIRRO` WRITE;
 /*!40000 ALTER TABLE `BAI_BAIRRO` DISABLE KEYS */;
-INSERT INTO `BAI_BAIRRO` VALUES (3,'Bosque dos Eucaliptos'),(2,'Eugênio de Melo'),(1,'Jardim da Granja');
+INSERT INTO `BAI_BAIRRO` VALUES (1,'Jardim da Granja',1),(2,'Eugênio de Melo',1),(3,'Bosque dos Eucaliptos',1);
 /*!40000 ALTER TABLE `BAI_BAIRRO` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,8 +162,10 @@ DROP TABLE IF EXISTS `CID_CIDADE`;
 CREATE TABLE `CID_CIDADE` (
   `CID_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CID_CIDADE` varchar(40) NOT NULL,
+  `CID_ESTADO` bigint(20) NOT NULL,
   PRIMARY KEY (`CID_ID`),
-  UNIQUE KEY `UK_7nyvcsmk4gdyt4qx8ffsahyfx` (`CID_CIDADE`)
+  KEY `FKa61cqeb212mgci7tl3jboo2oi` (`CID_ESTADO`),
+  CONSTRAINT `FKa61cqeb212mgci7tl3jboo2oi` FOREIGN KEY (`CID_ESTADO`) REFERENCES `ES_ESTADO` (`ES_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -171,7 +175,7 @@ CREATE TABLE `CID_CIDADE` (
 
 LOCK TABLES `CID_CIDADE` WRITE;
 /*!40000 ALTER TABLE `CID_CIDADE` DISABLE KEYS */;
-INSERT INTO `CID_CIDADE` VALUES (1,'Sao Jose dos Campos');
+INSERT INTO `CID_CIDADE` VALUES (1,'Sao Jose dos Campos',1);
 /*!40000 ALTER TABLE `CID_CIDADE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +227,7 @@ CREATE TABLE `COM_COMPETENCIA` (
 
 LOCK TABLES `COM_COMPETENCIA` WRITE;
 /*!40000 ALTER TABLE `COM_COMPETENCIA` DISABLE KEYS */;
-INSERT INTO `COM_COMPETENCIA` VALUES (1,'Analise de dados geograficos em R','R'),(2,'Desenvolvimento em Java SE, Java EE','Java'),(3,'Dsenvolvimento de aplicacoes interaticas com Microsoft Kinect','Kinect'),(4,'Desenvolvimento Web com Html 5, JS e CSS','Web');
+INSERT INTO `COM_COMPETENCIA` VALUES (1,'Desenvolvimento Web com Html 5, JS e CSS','Web'),(2,'Analise de dados geograficos em R','R'),(3,'Desenvolvimento em Java SE, Java EE','Java'),(4,'Dsenvolvimento de aplicacoes interaticas com Microsoft Kinect','Kinect');
 /*!40000 ALTER TABLE `COM_COMPETENCIA` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,23 +434,10 @@ DROP TABLE IF EXISTS `END_ENDERECO`;
 CREATE TABLE `END_ENDERECO` (
   `END_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `END_NUMERO` varchar(10) NOT NULL,
-  `END_BAIRRO` bigint(20) NOT NULL,
-  `END_CIDADE` bigint(20) NOT NULL,
-  `END_ESTADO` bigint(20) NOT NULL,
-  `END_PAIS` bigint(20) NOT NULL,
   `END_RUA` bigint(20) NOT NULL,
   PRIMARY KEY (`END_ID`),
-  UNIQUE KEY `UK_3qga9lkxqj7d5thcnvkl62vh1` (`END_NUMERO`),
-  KEY `FKdtorytfxth4vcq8sp10vk23s2` (`END_BAIRRO`),
-  KEY `FKdwg86lvmimpdpxw7rumxjby0p` (`END_CIDADE`),
-  KEY `FKm0p381l8b6sj75cmnp2gv8sl9` (`END_ESTADO`),
-  KEY `FK94xdd8q49jrokm206ply2yu9c` (`END_PAIS`),
   KEY `FKlyh6wt80d9q3gfm7nrab5aasr` (`END_RUA`),
-  CONSTRAINT `FK94xdd8q49jrokm206ply2yu9c` FOREIGN KEY (`END_PAIS`) REFERENCES `PA_PAIS` (`PA_ID`),
-  CONSTRAINT `FKdtorytfxth4vcq8sp10vk23s2` FOREIGN KEY (`END_BAIRRO`) REFERENCES `BAI_BAIRRO` (`BAI_ID`),
-  CONSTRAINT `FKdwg86lvmimpdpxw7rumxjby0p` FOREIGN KEY (`END_CIDADE`) REFERENCES `CID_CIDADE` (`CID_ID`),
-  CONSTRAINT `FKlyh6wt80d9q3gfm7nrab5aasr` FOREIGN KEY (`END_RUA`) REFERENCES `RU_RUA` (`RU_ID`),
-  CONSTRAINT `FKm0p381l8b6sj75cmnp2gv8sl9` FOREIGN KEY (`END_ESTADO`) REFERENCES `ES_ESTADO` (`ES_ID`)
+  CONSTRAINT `FKlyh6wt80d9q3gfm7nrab5aasr` FOREIGN KEY (`END_RUA`) REFERENCES `RU_RUA` (`RU_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -456,7 +447,7 @@ CREATE TABLE `END_ENDERECO` (
 
 LOCK TABLES `END_ENDERECO` WRITE;
 /*!40000 ALTER TABLE `END_ENDERECO` DISABLE KEYS */;
-INSERT INTO `END_ENDERECO` VALUES (1,'1.758',1,1,1,1,1),(2,'1.350',2,1,1,1,2),(3,'224',3,1,1,1,3);
+INSERT INTO `END_ENDERECO` VALUES (1,'1.758',1),(2,'1.350',2),(3,'224',3);
 /*!40000 ALTER TABLE `END_ENDERECO` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,8 +461,10 @@ DROP TABLE IF EXISTS `ES_ESTADO`;
 CREATE TABLE `ES_ESTADO` (
   `ES_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ES_ESTADO` varchar(20) NOT NULL,
+  `ES_PAIS` bigint(20) NOT NULL,
   PRIMARY KEY (`ES_ID`),
-  UNIQUE KEY `UK_cqqxmc5balx50617q9lmcs8ni` (`ES_ESTADO`)
+  KEY `FKe5t9v6g6bg0dnx1sa9dbkyiy4` (`ES_PAIS`),
+  CONSTRAINT `FKe5t9v6g6bg0dnx1sa9dbkyiy4` FOREIGN KEY (`ES_PAIS`) REFERENCES `PA_PAIS` (`PA_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -481,7 +474,7 @@ CREATE TABLE `ES_ESTADO` (
 
 LOCK TABLES `ES_ESTADO` WRITE;
 /*!40000 ALTER TABLE `ES_ESTADO` DISABLE KEYS */;
-INSERT INTO `ES_ESTADO` VALUES (1,'Sao Paulo');
+INSERT INTO `ES_ESTADO` VALUES (1,'Sao Paulo',1);
 /*!40000 ALTER TABLE `ES_ESTADO` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -763,8 +756,10 @@ DROP TABLE IF EXISTS `RU_RUA`;
 CREATE TABLE `RU_RUA` (
   `RU_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `RU_RUA` varchar(40) NOT NULL,
+  `RU_BAIRRO` bigint(20) NOT NULL,
   PRIMARY KEY (`RU_ID`),
-  UNIQUE KEY `UK_9w3sxn8tjixqtv0qhcx1pqtp6` (`RU_RUA`)
+  KEY `FKdq4q8j8af8hebjo4qvjmo627u` (`RU_BAIRRO`),
+  CONSTRAINT `FKdq4q8j8af8hebjo4qvjmo627u` FOREIGN KEY (`RU_BAIRRO`) REFERENCES `BAI_BAIRRO` (`BAI_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -774,7 +769,7 @@ CREATE TABLE `RU_RUA` (
 
 LOCK TABLES `RU_RUA` WRITE;
 /*!40000 ALTER TABLE `RU_RUA` DISABLE KEYS */;
-INSERT INTO `RU_RUA` VALUES (2,'Av. Cesare Mansueto Giulio Lattes'),(1,'Av. dos Astronautas'),(3,'Rua Cruzeiro');
+INSERT INTO `RU_RUA` VALUES (1,'Av. dos Astronautas',1),(2,'Av. Cesare Mansueto Giulio Lattes',2),(3,'Rua Cruzeiro',3);
 /*!40000 ALTER TABLE `RU_RUA` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -898,4 +893,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-19 18:12:42
+-- Dump completed on 2016-06-12 19:25:28

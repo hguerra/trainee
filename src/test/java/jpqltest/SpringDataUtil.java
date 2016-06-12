@@ -28,4 +28,9 @@ class SpringDataUtil {
     static synchronized EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+
+    public static void main(String[] args) {
+        EntityManager etmf = getEntityManager();
+        emf.close();
+    }
 }

@@ -43,7 +43,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             todos.add(usuario);
         return todos;
     }
-
     @Override
     public List<Usuario> buscarUsuariosPorEndereco(Endereco endereco) {
         return usuarioRepository.findByEndereco(endereco);

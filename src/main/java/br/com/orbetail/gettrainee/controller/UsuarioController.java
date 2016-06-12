@@ -13,7 +13,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -56,7 +59,9 @@ public class UsuarioController {
             // So, browser is requesting the image. Return a real StreamedContent with the image bytes;
             String nome = context.getExternalContext().getRequestParameterMap().get("usuarioNome");
             Usuario usuario = usuarioService.buscarUsuarioPorNome(nome);
-            return new DefaultStreamedContent(new ByteArrayInputStream(usuario.getImage()));
+
+            InputStream stream = new ByteArrayInputStream(usuario.getImage());
+            return new DefaultStreamedContent(stream);
         }
 
     }

@@ -30,6 +30,7 @@ public class ClassificacaoDisciplinaTest {
     public static void tearDown() throws Exception {
         entityManager.close();
     }
+
     private static void persistClassificacaoDisciplina(Integer peso, String nome,
                                                        Integer semestre, String docenteNome, String lattes) {
         EntityTransaction transaction = entityManager.getTransaction();
@@ -180,7 +181,6 @@ public class ClassificacaoDisciplinaTest {
         persistClassificacaoDisciplina(1, "Inglês VI", 6, "Carolina Tayar Farina de Rource", "http://lattes.cnpq" +
                 ".br/8034408077183399");
     }
-
 
 
 }

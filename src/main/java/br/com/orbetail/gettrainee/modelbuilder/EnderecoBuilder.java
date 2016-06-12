@@ -1,11 +1,7 @@
 package br.com.orbetail.gettrainee.modelbuilder;
 
 import br.com.orbetail.gettrainee.model.Endereco;
-import br.com.orbetail.gettrainee.model.endereco.Bairro;
-import br.com.orbetail.gettrainee.model.endereco.Cidade;
-import br.com.orbetail.gettrainee.model.endereco.Estado;
-import br.com.orbetail.gettrainee.model.endereco.Pais;
-import br.com.orbetail.gettrainee.model.endereco.Rua;
+import br.com.orbetail.gettrainee.model.endereco.*;
 
 /**
  * @author heitor
@@ -59,12 +55,12 @@ public class EnderecoBuilder {
 
     public Endereco get() {
         Endereco endereco = new Endereco();
+        estado.setPais(pais);
+        cidade.setEstado(estado);
+        bairro.setCidade(cidade);
+        rua.setBairro(bairro);
         endereco.setNumero(numero);
         endereco.setRua(rua);
-        endereco.setBairro(bairro);
-        endereco.setCidade(cidade);
-        endereco.setEstado(estado);
-        endereco.setPais(pais);
         return endereco;
     }
 

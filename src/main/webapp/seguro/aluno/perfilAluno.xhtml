@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="${pageContext.request.contextPath}/template/layout.xhtml">
+
+    <ui:define name="menu">
+        <div class="content">
+            <div class="properties-section">
+                <div class="container">
+                    <div class="properties-grids">
+                        <div class="col-md-3 agentprofile-right">
+                            <div class="properties-top">
+                                <h4>Grade</h4>
+                                <ul>
+                                    <li>DISCIPLINAS AQUI</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9 agentprofile-left">
+                            <div class="agent-profile">
+                                <div class="profile-left">
+                                    <h4>NOME_ALUNO</h4>
+                                    <br/>
+                                    <h:graphicImage value="../../resources/images/a2.jpg" styleClass="img-responsive"/>
+                                </div>
+                                <div class="profile-right">
+                                    <h5>My details</h5>
+                                    <ul>
+                                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i> <a href="#"><a
+                                                href="mailto:MAIL">MAIL</a></a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="about-me">
+                                <h4>Sobre</h4>
+                                <p>ALGUMA_DESCRICAO_AQUI.</p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

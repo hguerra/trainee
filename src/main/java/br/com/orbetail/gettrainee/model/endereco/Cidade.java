@@ -1,11 +1,6 @@
 package br.com.orbetail.gettrainee.model.endereco;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author heitor
@@ -19,8 +14,12 @@ public class Cidade {
     @Column(name = "CID_ID")
     private Long id;
 
-    @Column(name = "CID_CIDADE", unique = true, length = 40, nullable = false)
+    @Column(name = "CID_CIDADE", length = 40, nullable = false)
     private String cidade;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "CID_ESTADO", nullable = false)
+    private Estado estado;
 
     /**
      * Getters and setters
@@ -41,5 +40,13 @@ public class Cidade {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 }

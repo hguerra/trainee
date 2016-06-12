@@ -17,10 +17,16 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
@@ -115,7 +121,6 @@ public class AlunoTest {
             projeto.setNome("GetTrainee");
             projeto.setDescricao("Projeto Interdisciplinar FATEC");
             projeto.setDataInicio(LocalDate.of(2016, Month.FEBRUARY, 17));
-            projeto.setDataTermino(LocalDate.of(2016, Month.JUNE, 14));
 
             Projeto[] portifolio = {projeto};
             /**
@@ -177,17 +182,15 @@ public class AlunoTest {
              *
              */
             Endereco endereco = new Endereco();
-            endereco.setPais(empresa.getEndereco().getPais());
-            endereco.setEstado(empresa.getEndereco().getEstado());
-            endereco.setCidade(empresa.getEndereco().getCidade());
 
             Bairro bairro = new Bairro();
             bairro.setBairro("Bosque dos Eucaliptos");
+            bairro.setCidade(empresa.getEndereco().getRua().getBairro().getCidade());
 
             Rua rua = new Rua();
             rua.setRua("Rua Cruzeiro");
+            rua.setBairro(bairro);
 
-            endereco.setBairro(bairro);
             endereco.setRua(rua);
             endereco.setNumero("224");
 
@@ -201,12 +204,18 @@ public class AlunoTest {
             String senha = "11";
             Perfil[] perfils = {mock.getPerfil()};
 
+            InputStream stream = new ByteArrayInputStream(mock.getImagem());
+            BufferedImage imBuff = ImageIO.read(stream);
+            BufferedImage resizedImg = resize(imBuff, 275, 75);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(resizedImg, "jpg", os);
+
             Aluno aluno = new AlunoBuilder()
                     .nome(nome)
                     .login(login)
                     .senha(senha)
                     .endereco(endereco)
-                    .image(mock.getImagem())
+                    .image(os.toByteArray())
                     .comPerfils(perfils)
                     .projetos(portifolio).aluno()
                     .cpf(cpf)
@@ -279,5 +288,18 @@ public class AlunoTest {
             if (transaction != null && transaction.isActive())
                 transaction.rollback();
         }
+    }
+
+    private  BufferedImage resize(BufferedImage image, int newWidth, int newHeight) {
+        int currentWidth = image.getWidth();
+        int currentHeight = image.getHeight();
+        BufferedImage newImage = new BufferedImage(newWidth, newHeight, image.getType());
+        Graphics2D graphics2d = newImage.createGraphics();
+        graphics2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        graphics2d.drawImage(image, 0, 0, newWidth, newHeight, 0, 0,
+                currentWidth, currentHeight, null);
+        graphics2d.dispose();
+        return newImage;
     }
 }

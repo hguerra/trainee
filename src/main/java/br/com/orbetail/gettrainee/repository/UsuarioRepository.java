@@ -27,19 +27,19 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     List<Usuario> findByRua(String rua);
 
     @Query("select usuarios " +
-            "from Usuario as usuarios where upper(usuarios.endereco.bairro.bairro) = ?1")
+            "from Usuario as usuarios where upper(usuarios.endereco.rua.bairro.bairro) = ?1")
     List<Usuario> findByBairro(String bairro);
 
     @Query("select usuarios " +
-            "from Usuario as usuarios where upper(usuarios.endereco.cidade.cidade) = ?1")
+            "from Usuario as usuarios where upper(usuarios.endereco.rua.bairro.cidade.cidade) = ?1")
     List<Usuario> findByCidade(String cidade);
 
     @Query("select usuarios " +
-            "from Usuario as usuarios where upper(usuarios.endereco.estado.estado) = ?1")
+            "from Usuario as usuarios where upper(usuarios.endereco.rua.bairro.cidade.estado.estado) = ?1")
     List<Usuario> findByEstado(String estado);
 
     @Query("select usuarios " +
-            "from Usuario as usuarios where upper(usuarios.endereco.pais.pais) = ?1")
+            "from Usuario as usuarios where upper(usuarios.endereco.rua.bairro.cidade.estado.pais.pais) = ?1")
     List<Usuario> findByPais(String pais);
 
     Set<Usuario> findByPerfilsIn(Set<Perfil> perfils);

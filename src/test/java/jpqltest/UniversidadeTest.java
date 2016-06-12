@@ -65,17 +65,15 @@ public class UniversidadeTest {
         }
 
         Endereco endereco = new Endereco();
-        endereco.setPais(empresa.getEndereco().getPais());
-        endereco.setEstado(empresa.getEndereco().getEstado());
-        endereco.setCidade(empresa.getEndereco().getCidade());
 
         Bairro bairro = new Bairro();
         bairro.setBairro("Eugênio de Melo");
+        bairro.setCidade(empresa.getEndereco().getRua().getBairro().getCidade());
 
         Rua rua = new Rua();
         rua.setRua("Av. Cesare Mansueto Giulio Lattes");
+        rua.setBairro(bairro);
 
-        endereco.setBairro(bairro);
         endereco.setRua(rua);
         endereco.setNumero("1.350");
 
@@ -100,7 +98,8 @@ public class UniversidadeTest {
     @Ignore
     @Test
     public void findAllCursosTest() {
-        Query q = entityManager.createQuery("select cursos from Universidade universidade inner join universidade.cursos cursos", Curso
+        Query q = entityManager.createQuery("select cursos from Universidade universidade inner join universidade" +
+                ".cursos cursos", Curso
                 .class);
 
         List<Curso> cursos = q.getResultList();

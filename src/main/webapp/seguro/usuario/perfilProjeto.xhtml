@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="${pageContext.request.contextPath}/template/layout.xhtml">
+
+    <ui:define name="menu">
+        <div class="content">
+            <div class="blog-section">
+                <div class="container">
+                    <div class="blog-grids">
+                        <div class="col-md-8 blog-grid">
+                            <div class="rules">
+                                <div class="additional-details">
+                                    <h3>Projeto</h3>
+                                    <p>PROJETO_DESCRICAO</p>
+                                    <br/>
+                                    <h3>Requisitos</h3>
+                                    <div id="cursos">
+                                        <div class="rules">
+                                            <h4>Valor</h4>
+                                            <p class="trad"> R$ VALOR.</p>
+                                        </div>
+                                        <ul>
+                                            <li><span>REQUISITO</span>: DESCRICAO_REQUISITO</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 contact-grid1">
+                            <h4>Usuário</h4>
+                            <div class="contact-top">
+                                <div class="agent-img">
+                                    <h:graphicImage value="/resources/images/t1.png" styleClass="img-responsive"/>
+                                </div>
+                                <div class="agent-info">
+                                    <h5>EMPRESA_NOME</h5>
+                                    <h6>EMPRESA_SLOGAN</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <ul>
+                                <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i> <a
+                                        href="mailto:MAIL">MAIL</a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

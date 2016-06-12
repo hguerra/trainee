@@ -26,28 +26,12 @@ public class Endereco implements Serializable {
     @Column(name = "END_ID")
     private Long id;
 
-    @Column(name = "END_NUMERO", unique = true, length = 10, nullable = false)
+    @Column(name = "END_NUMERO", length = 10, nullable = false)
     private String numero;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "END_RUA", nullable = false)
     private Rua rua;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "END_BAIRRO", nullable = false)
-    private Bairro bairro;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "END_CIDADE", nullable = false)
-    private Cidade cidade;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "END_ESTADO", nullable = false)
-    private Estado estado;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "END_PAIS", nullable = false)
-    private Pais pais;
 
     /**
      * Getters and setters
@@ -76,37 +60,5 @@ public class Endereco implements Serializable {
 
     public void setRua(Rua rua) {
         this.rua = rua;
-    }
-
-    public Bairro getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
-    }
-
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
     }
 }

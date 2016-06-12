@@ -1,11 +1,6 @@
 package br.com.orbetail.gettrainee.model.endereco;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author heitor
@@ -19,8 +14,12 @@ public class Estado {
     @Column(name = "ES_ID")
     private Long id;
 
-    @Column(name = "ES_ESTADO", unique = true, length = 20, nullable = false)
+    @Column(name = "ES_ESTADO", length = 20, nullable = false)
     private String estado;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "ES_PAIS", nullable = false)
+    private Pais pais;
 
     /**
      * Getters and setters
@@ -41,5 +40,13 @@ public class Estado {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 }

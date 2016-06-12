@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="${pageContext.request.contextPath}/template/layout.xhtml">
+
+    <ui:define name="menu">
+        <div class="content">
+            <div class="contact-section">
+                <div class="container">
+                    <div class="contact-grids">
+                        <div class="col-md-12 contact-grid" align="center">
+                            <h5>Buscar Empresa</h5>
+                            <h:form enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <br/>
+                                    <h:inputText pt:placeholder="Buscar"/>
+                                    <br/>
+                                    <h:commandButton type="submit" value="Buscar"/>
+                                </div>
+                                <br/>
+                            </h:form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -33,6 +33,7 @@ public class UsuarioRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     private static final String EMPRESA_USERNAME  = "inpe";
     private static final String EMPRESA_SENHA  = "11";
     private static final String EMPRESA_RUA  = "Av. dos Astronautas".toUpperCase();
+    private static final String EMPRESA_CIDADE  = "Sao Jose dos Campos".toUpperCase();
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -86,6 +87,16 @@ public class UsuarioRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     @Test
     public void findByRuaTest() throws Exception {
         List<Usuario> usuarios = usuarioRepository.findByRua(EMPRESA_RUA);
+
+        if(usuarios.isEmpty())
+            fail("isEmpty");
+
+        assertTrue(!usuarios.isEmpty());
+    }
+
+    @Test
+    public void findByCidadeTest() throws Exception {
+        List<Usuario> usuarios = usuarioRepository.findByCidade(EMPRESA_CIDADE);
 
         if(usuarios.isEmpty())
             fail("isEmpty");
