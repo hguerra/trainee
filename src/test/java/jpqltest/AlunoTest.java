@@ -8,6 +8,7 @@ import br.com.orbetail.gettrainee.model.aluno.*;
 import br.com.orbetail.gettrainee.model.endereco.Bairro;
 import br.com.orbetail.gettrainee.model.endereco.Rua;
 import br.com.orbetail.gettrainee.model.security.Perfil;
+import br.com.orbetail.gettrainee.model.security.Role;
 import br.com.orbetail.gettrainee.model.universidade.Curso;
 import br.com.orbetail.gettrainee.model.universidade.Disciplina;
 import br.com.orbetail.gettrainee.modelbuilder.AlunoBuilder;
@@ -292,7 +293,7 @@ public class AlunoTest {
 
     @Ignore
     @Test
-    public void editarAlunoEmail(){
+    public void editarAlunoEmail() {
         EntityTransaction transaction = entityManager.getTransaction();
 
         try {
@@ -310,7 +311,52 @@ public class AlunoTest {
         }
     }
 
-    private  BufferedImage resize(BufferedImage image, int newWidth, int newHeight) {
+
+    @Ignore
+    @Test
+    public void editarRole() {
+
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+            TypedQuery queryAluno = entityManager.createQuery("select e from Aluno e where e.login = :login",
+                    Aluno.class);
+            queryAluno.setParameter("login", "heitor");
+
+            Aluno aluno = (Aluno) queryAluno.getSingleResult();
+
+            TypedQuery queryPublico = entityManager.createQuery("select e from Perfil e where e.nome = :nome",
+                    Perfil.class);
+            queryPublico.setParameter("nome", "ROLE_PUBLIC");
+
+            Perfil perfilPublico = (Perfil) queryPublico.getSingleResult();
+            aluno.getPerfils().add(perfilPublico);
+
+            TypedQuery queryPerfilAluno = entityManager.createQuery("select e from Perfil e where e.nome = :nome",
+                    Perfil.class);
+            queryPerfilAluno.setParameter("nome", "ROLE_ALUNO");
+            Perfil perfilAluno = (Perfil) queryPerfilAluno.getSingleResult();
+            aluno.getPerfils().add(perfilAluno);
+
+            for (Perfil p : aluno.getPerfils()) {
+                if (p.getRoles().isEmpty()) {
+                    Set<Role> roles = new HashSet<>();
+                    roles.add(Role.ROLE_ALUNO);
+                    p.setRoles(roles);
+                }
+            }
+
+            aluno.getPerfils().add(perfilAluno);
+            entityManager.merge(aluno);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive())
+                transaction.rollback();
+        }
+    }
+
+    private BufferedImage resize(BufferedImage image, int newWidth, int newHeight) {
         int currentWidth = image.getWidth();
         int currentHeight = image.getHeight();
         BufferedImage newImage = new BufferedImage(newWidth, newHeight, image.getType());

@@ -1,11 +1,13 @@
 package jpqltest;
 
+import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.Universidade;
 import br.com.orbetail.gettrainee.model.endereco.Bairro;
 import br.com.orbetail.gettrainee.model.endereco.Rua;
 import br.com.orbetail.gettrainee.model.security.Perfil;
+import br.com.orbetail.gettrainee.model.security.Role;
 import br.com.orbetail.gettrainee.model.universidade.Curso;
 import br.com.orbetail.gettrainee.modelbuilder.UniversidadeBuilder;
 import jpqltest.mock.UniversidadeMock;
@@ -17,7 +19,10 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 
@@ -104,5 +109,36 @@ public class UniversidadeTest {
 
         List<Curso> cursos = q.getResultList();
         assertTrue(!cursos.isEmpty());
+    }
+
+    @Ignore
+    @Test
+    public void editarRole() {
+
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+            TypedQuery queryUniversidade = entityManager.createQuery("select e from Universidade e where e.login = " +
+                    ":login",
+                    Universidade.class);
+            queryUniversidade.setParameter("login", "fatec_sjc");
+
+            Universidade universidade = (Universidade) queryUniversidade.getSingleResult();
+
+            TypedQuery queryPublico = entityManager.createQuery("select e from Perfil e where e.nome = :nome",
+                    Perfil.class);
+            queryPublico.setParameter("nome", "ROLE_PUBLIC");
+
+            Perfil perfilPublico = (Perfil) queryPublico.getSingleResult();
+            universidade.getPerfils().add(perfilPublico);
+
+
+            entityManager.merge(universidade);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive())
+                transaction.rollback();
+        }
     }
 }
