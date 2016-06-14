@@ -33,4 +33,10 @@ public interface UsuarioService {
     List<Usuario> buscarUsuariosPorPais(String pais);
 
     Set<Usuario> buscarUsuariosPorPerfils(Perfil... perfil);
+
+    boolean isLoginExistente(String login);
+
+    Usuario salvar(Usuario usuario);
+
+    Usuario buscarUsuarioPorLogin(String login);
 }

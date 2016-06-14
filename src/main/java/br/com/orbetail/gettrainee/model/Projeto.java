@@ -92,4 +92,8 @@ public class Projeto implements Serializable {
     public String getDataFormatada(LocalDate data) {
         return data.format(formatter);
     }
+
+    public DateTimeFormatter getFormatter() {
+        return formatter;
+    }
 }

@@ -2,10 +2,36 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="${pageContext.request.contextPath}/template/layout.xhtml">
 
     <ui:define name="menu">
-        <h:outputText value="cadastrarProjeto"/>
+        <div class="content">
+            <div class="contact-section">
+                <div class="container">
+                    <div class="contact-grids">
+                        <div class="col-md-8 contact-grid">
+                            <h5>Cadastrar Projeto</h5>
+                            <h:form>
+                                <h:messages id="termoInvalido" globalOnly="true" style="color: red"/>
+                                <div class="form-group">
+                                    <br/>
+                                    <h:inputText pt:placeholder="Nome" value="#{projetoController.projeto.nome}"/>
+                                    <h:inputText pt:placeholder="14/06/2016" value="#{projetoController.data}"/>
+                                    <h:inputTextarea pt:placeholder="Descrição"
+                                                     value="#{projetoController.projeto.descricao}"/>
+                                    <h:commandButton type="submit" value="Request"
+                                                     action="#{projetoController.salvar(projetoController.projeto)}">
+                                        <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
+                                </div>
+                                <br/>
+                            </h:form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>

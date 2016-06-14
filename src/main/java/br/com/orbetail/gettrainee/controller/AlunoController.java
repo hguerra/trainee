@@ -1,18 +1,15 @@
 package br.com.orbetail.gettrainee.controller;
 
 import br.com.orbetail.gettrainee.model.Aluno;
+import br.com.orbetail.gettrainee.model.endereco.Bairro;
 import br.com.orbetail.gettrainee.model.endereco.Cidade;
-import br.com.orbetail.gettrainee.model.security.Perfil;
-import br.com.orbetail.gettrainee.modelbuilder.AlunoBuilder;
 import br.com.orbetail.gettrainee.service.AlunoService;
 import br.com.orbetail.gettrainee.service.EnderecoService;
 import br.com.orbetail.gettrainee.util.JSFMensagens;
-import br.com.orbetail.gettrainee.util.ValidadorCollection;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author heitor
@@ -23,9 +20,15 @@ public class AlunoController {
     private final Long SAOPAULO_ID = 1L;
     private Long idCidade;
     private Long idBairro;
+    private String rua;
+    private String numero;
     private List<Cidade> cidades;
-    private AlunoBuilder alunoBuilder = new AlunoBuilder();
+    private List<Bairro> bairros;
+
+    private String termoBusca;
+    private String tipoBusca;
     private List<Aluno> alunos;
+
 
     @ManagedProperty(value = "#{alunoService}")
     private AlunoService alunoService;
@@ -45,24 +48,25 @@ public class AlunoController {
     }
 
 
-    public Aluno getAluno() {
-        return alunoBuilder.get();
-    }
-
     public List<Aluno> getAlunos() {
-        if (ValidadorCollection.isListNotNullOrEmpty.validar(alunos))
-            return alunos;
-        alunos = alunoService.listarTodos();
         return alunos;
     }
 
-    public void onClickSubmit() {
-        if(idBairro == null){
-            JSFMensagens.incluirMensagemErro("idBairro NULL");
+    public void buscar() {
+        if (tipoBusca.equals("TODOS")) {
+            alunos = alunoService.listarTodos();
+        } else if (tipoBusca.equals("RECOMENDACAO")) {
+            try {
+                alunos = alunoService.buscarAlunosPorRecomendacoes(Integer.valueOf(getTermoBusca()));
+            } catch (Exception e) {
+                JSFMensagens.incluirMensagemErro("Digite um valor numerico!");
+                alunos = alunoService.listarTodos();
+            }
+        } else if (tipoBusca.equals("PALAVRA_CHAVE")) {
+            alunos = alunoService.buscarAlunosPorCompetencias(getTermoBusca());
         }
-
     }
-    
+
     public Long getIdCidade() {
         return idCidade;
     }
@@ -79,8 +83,24 @@ public class AlunoController {
         this.idBairro = idBairro;
     }
 
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
     public List<Cidade> getCidades() {
-        if(cidades == null){
+        if (cidades == null) {
             cidades = enderecoService.listarCidadesEstado(SAOPAULO_ID);
         }
         return cidades;
@@ -91,4 +111,30 @@ public class AlunoController {
         this.cidades = cidades;
     }
 
+    public List<Bairro> getBairros() {
+        if (bairros == null && idCidade != null) {
+            bairros = enderecoService.listarBairrosCidade(idCidade);
+        }
+        return bairros;
+    }
+
+    public void setBairros(List<Bairro> bairros) {
+        this.bairros = bairros;
+    }
+
+    public String getTipoBusca() {
+        return tipoBusca;
+    }
+
+    public void setTipoBusca(String tipoBusca) {
+        this.tipoBusca = tipoBusca;
+    }
+
+    public String getTermoBusca() {
+        return termoBusca;
+    }
+
+    public void setTermoBusca(String termoBusca) {
+        this.termoBusca = termoBusca;
+    }
 }

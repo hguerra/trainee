@@ -25,6 +25,11 @@ public abstract class UsuarioBuilder {
         return this;
     }
 
+    public UsuarioBuilder email(String email) {
+        this.usuario.setEmail(email);
+        return this;
+    }
+
     public UsuarioBuilder login(String login) {
         this.usuario.setLogin(login);
         return this;

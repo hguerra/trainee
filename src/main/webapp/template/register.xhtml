@@ -1,5 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <!-- Register -->
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
@@ -13,15 +14,21 @@
                     <div class="login-grids">
                         <div class="login">
                             <div class="login-right">
+                                <h:messages id="emailInvalido" globalOnly="true" style="color: red"/>
                                 <h:form>
                                     <h3>Registrar</h3>
-                                    <h:inputText pt:placeholder="Nome"/>
-                                    <h:inputText pt:placeholder="Telefone"/>
-                                    <h:inputText pt:placeholder="E-mail"/>
-                                    <h:inputSecret pt:placeholder="Senha"/>
+                                    <h:inputText pt:placeholder="Nome" value="#{usuarioController.usuario.nome}"
+                                                 required="true"/>
+                                    <h:inputText pt:placeholder="E-mail" value="#{usuarioController.usuario.email}"
+                                                 required="true"/>
+                                    <h:inputText pt:placeholder="Login" value="#{usuarioController.usuario.login}"
+                                                 required="true"/>
+                                    <h:inputSecret pt:placeholder="Senha" value="#{usuarioController.usuario.senha}"
+                                                   required="true"/>
 
-                                    <h:commandButton value="Registre agora"/>
-
+                                    <h:commandButton value="Registre agora" action="#{usuarioController.cadastrarUsuario}">
+                                        <f:ajax execute="@form" render=":emailInvalido"/>
+                                    </h:commandButton>
                                 </h:form>
                             </div>
                             <div class="clearfix"></div>

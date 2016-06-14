@@ -12,21 +12,61 @@
                 <div class="container">
                     <div class="contact-grids">
                         <div class="col-md-12 contact-grid" align="center">
-                            <h5>Buscar Aluno</h5>
-                            <h:form enctype="multipart/form-data">
+                            <h5>Buscar Universidade</h5>
+                            <h:form>
+                                <h:messages id="termoInvalido" globalOnly="true" style="color: red"/>
                                 <div class="form-group">
                                     <br/>
-                                    <h:inputText pt:placeholder="Buscar"/>
+                                    <h:inputText pt:placeholder="Buscar" value="#{universidadeController.termoBusca}"/>
                                     <br/>
                                     <h:selectOneMenu id="selectBuscar" styleClass="form-control"
-                                                     style="border-radius: 0; width: 30%">
-                                        <f:selectItem itemLabel="Recomendacao"/>
-                                        <f:selectItem itemLabel="Palavra-Chave" />
+                                                     style="border-radius: 0; width: 30%"
+                                                     value="#{universidadeController.tipoBusca}">
+                                        <f:selectItem itemLabel="Buscar..." itemValue="TODOS"/>
+                                        <f:selectItem itemLabel="Cursos" itemValue="CURSO"/>
                                     </h:selectOneMenu>
                                     <br/>
-                                    <h:commandButton type="submit" value="Buscar"/>
+                                    <h:commandButton type="submit" value="Buscar" action="#{universidadeController.buscar}">
+                                        <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
                                 </div>
                                 <br/>
+                                <h:panelGroup id="universidadesBuscados" rendered="#{not empty universidadeController.universidades}">
+                                    <div class="content">
+                                        <div class="agent-section">
+                                            <div class="container">
+
+                                                <div class="agent-grids">
+
+                                                    <ui:repeat value="#{universidadeController.universidades}" var="universidade">
+
+                                                        <div class="col-md-6 agent-grid">
+                                                            <div class="agent-left">
+                                                                <p:graphicImage value="#{usuarioController.image}"
+                                                                                styleClass="img-responsive">
+                                                                    <f:param name="usuarioLogin"
+                                                                             value="#{universidade.login}"/>
+                                                                </p:graphicImage>
+                                                            </div>
+                                                            <div class="agent-right">
+                                                                <h4>#{universidade.nome}</h4>
+                                                                <ul>
+                                                                    <li><i class="glyphicon glyphicon-envelope"
+                                                                           aria-hidden="true"></i><a
+                                                                            href="mailto:#{universidade.email}">#{universidade.email}</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                    </ui:repeat>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
                             </h:form>
                         </div>
                         <div class="clearfix"></div>

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author heitor
@@ -60,5 +61,11 @@ public class UniversidadeServiceImpl implements UniversidadeService {
     @Override
     public List<Curso> buscarCursosFornecidosPorId(Long id) {
         return universidadeRepository.findAllCursos(id);
+    }
+
+    @Override
+    public List<Universidade> buscarUniversidadePorCursoDescricao(String descricao) {
+        Set<Curso> cursos = universidadeRepository.findCursosByDescricao(descricao.toUpperCase());
+        return universidadeRepository.findByCursosIn(cursos);
     }
 }

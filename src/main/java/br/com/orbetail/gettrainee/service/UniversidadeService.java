@@ -22,4 +22,6 @@ public interface UniversidadeService {
     Universidade buscarUniversidadePorCnpj(String cnpj);
 
     List<Curso> buscarCursosFornecidosPorId(Long id);
+
+    List<Universidade> buscarUniversidadePorCursoDescricao(String descricao);
 }

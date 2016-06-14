@@ -2,7 +2,6 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="${pageContext.request.contextPath}/template/layout.xhtml">
 
@@ -13,20 +12,61 @@
                     <div class="contact-grids">
                         <div class="col-md-12 contact-grid" align="center">
                             <h5>Buscar Projeto</h5>
-                            <h:form enctype="multipart/form-data">
+                            <h:form>
+                                <h:messages id="termoInvalido" globalOnly="true" style="color: red"/>
                                 <div class="form-group">
                                     <br/>
-                                    <h:inputText pt:placeholder="Buscar"/>
+                                    <h:inputText pt:placeholder="Buscar" value="#{projetoController.termoBusca}"/>
                                     <br/>
                                     <h:selectOneMenu id="selectBuscar" styleClass="form-control"
-                                                     style="border-radius: 0; width: 30%">
-                                        <f:selectItem itemLabel="Todos"/>
-                                        <f:selectItem itemLabel="Abertos"/>
+                                                     style="border-radius: 0; width: 30%"
+                                                     value="#{projetoController.tipoBusca}">
+                                        <f:selectItem itemLabel="Buscar..." itemValue="TODOS"/>
+                                        <f:selectItem itemLabel="Nome" itemValue="NOME"/>
+                                        <f:selectItem itemLabel="Descricao" itemValue="DESCRICAO"/>
+                                        <f:selectItem itemLabel="Aberto" itemValue="ABERTO"/>
                                     </h:selectOneMenu>
                                     <br/>
-                                    <h:commandButton type="submit" value="Buscar"/>
+                                    <h:commandButton type="submit" value="Buscar" action="#{projetoController.buscar}">
+                                        <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
                                 </div>
                                 <br/>
+                                <h:panelGroup id="projetosBuscados" rendered="#{not empty projetoController.projetos}">
+                                    <div class="content">
+                                        <div class="agent-section">
+                                            <div class="container">
+
+                                                <div class="agent-grids">
+
+                                                    <ui:repeat value="#{projetoController.projetos}" var="projeto">
+
+                                                        <div class="col-md-6 agent-grid">
+                                                            <div class="agent-left">
+                                                                <h:graphicImage value="/resources/images/lock_close.png"
+                                                                                rendered="#{not empty projeto.dataTermino}"/>
+                                                                <h:graphicImage value="/resources/images/lock_open.png"
+                                                                                rendered="#{empty projeto.dataTermino}"/>
+                                                            </div>
+                                                            <div class="agent-right">
+                                                                <h4>#{projeto.nome}</h4>
+                                                                <ul>
+                                                                    <li>#{projeto.getDataFormatada(projeto.dataInicio)}
+                                                                    </li>
+                                                                    <li>#{projeto.descricao}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                    </ui:repeat>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
                             </h:form>
                         </div>
                         <div class="clearfix"></div>

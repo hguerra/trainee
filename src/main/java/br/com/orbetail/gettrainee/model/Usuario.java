@@ -33,12 +33,15 @@ public class Usuario implements UserDetails, Serializable {
     @Column(name = "USR_SENHA", length = 40, nullable = false)
     private String senha;
 
+    @Column(name = "USR_EMAIL", nullable = false)
+    private String email;
+
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "USR_ENDERECO")
     private Endereco endereco;
 
     @Lob
-    @Column(name = "USR_IMAGE", nullable = false, columnDefinition = "mediumblob")
+    @Column(name = "USR_IMAGE", columnDefinition = "mediumblob")
     private byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -166,5 +169,13 @@ public class Usuario implements UserDetails, Serializable {
 
     public void setProjetos(Set<Projeto> projetos) {
         this.projetos = projetos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

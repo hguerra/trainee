@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,13 @@ public class ProjetoServiceImpl implements ProjetoService {
     }
 
     @Override
+    @Transactional
     public Projeto salvar(Projeto projeto) {
         return projetoRepository.save(projeto);
     }
 
     @Override
+    @Transactional
     public void excluir(Long id) {
         projetoRepository.delete(id);
     }
@@ -59,5 +62,15 @@ public class ProjetoServiceImpl implements ProjetoService {
     @Override
     public List<Projeto> buscarCincoProjetosRecentesEmAberto() {
         return projetoRepository.findProjetosRecentesAbertos(MAX_PAGE);
+    }
+
+    @Override
+    public List<Projeto> buscarProjetoPorNome(String termoBusca) {
+        return projetoRepository.findByNome(termoBusca);
+    }
+
+    @Override
+    public List<Projeto> buscarProjetoPorDescricao(String descricao) {
+        return projetoRepository.findByDescricaoContainingIgnoreCase(descricao);
     }
 }

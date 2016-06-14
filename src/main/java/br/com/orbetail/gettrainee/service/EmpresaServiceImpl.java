@@ -4,6 +4,7 @@ import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.repository.EmpresaRepository;
 import br.com.orbetail.gettrainee.service.criptografia.Criptografia;
 import br.com.orbetail.gettrainee.service.criptografia.CriptografiaTipo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import java.util.*;
 
 @Service("empresaService")
 public class EmpresaServiceImpl implements EmpresaService {
+    @Autowired
     private EmpresaRepository empresaRepository;
 
     /**
@@ -53,10 +55,10 @@ public class EmpresaServiceImpl implements EmpresaService {
     @Override
     public List<Empresa> listarTodos() {
         List<Empresa> empresas = new ArrayList<>();
-        for(Empresa empresa: empresaRepository.findAll()){
+        for (Empresa empresa : empresaRepository.findAll()) {
             empresas.add(empresa);
         }
-       return empresas;
+        return empresas;
     }
 
     @Override

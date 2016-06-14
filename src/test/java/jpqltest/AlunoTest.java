@@ -290,6 +290,26 @@ public class AlunoTest {
         }
     }
 
+    @Ignore
+    @Test
+    public void editarAlunoEmail(){
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+            TypedQuery queryAluno = entityManager.createQuery("select a from Aluno a where a.cpf = :cpf", Aluno.class);
+            queryAluno.setParameter("cpf", "42198627817");
+
+            Aluno aluno = (Aluno) queryAluno.getSingleResult();
+            aluno.setEmail("heitorguerrac@gmail.com");
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive())
+                transaction.rollback();
+        }
+    }
+
     private  BufferedImage resize(BufferedImage image, int newWidth, int newHeight) {
         int currentWidth = image.getWidth();
         int currentHeight = image.getHeight();

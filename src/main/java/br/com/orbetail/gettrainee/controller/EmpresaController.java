@@ -3,10 +3,14 @@ package br.com.orbetail.gettrainee.controller;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.modelbuilder.EmpresaBuilder;
 import br.com.orbetail.gettrainee.service.EmpresaService;
+import br.com.orbetail.gettrainee.util.JSFMensagens;
 import br.com.orbetail.gettrainee.util.ValidadorCollection;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,11 +19,26 @@ import java.util.List;
  */
 @ManagedBean
 public class EmpresaController {
-    private EmpresaBuilder empresaBuilder = new EmpresaBuilder();
+    private String termoBusca;
+    private String tipoBusca;
     private List<Empresa> empresas;
 
     @ManagedProperty(value = "#{empresaService}")
     private EmpresaService empresaService;
+
+
+    public void buscar() {
+        if (tipoBusca.equals("TODOS")) {
+            empresas = empresaService.listarTodos();
+        } else if (tipoBusca.equals("ESPECIALIZACAO")) {
+            try {
+                empresas = new ArrayList<>(empresaService.buscarEmpresasPorEspecializacao(termoBusca));
+            } catch (Exception e) {
+                JSFMensagens.incluirMensagemErro("Erro ao buscar termo!");
+                empresas = empresaService.listarTodos();
+            }
+        }
+    }
 
     /**
      * @param empresaService:EmpresaService
@@ -28,14 +47,27 @@ public class EmpresaController {
         this.empresaService = empresaService;
     }
 
-    public Empresa getEmpresa() {
-        return empresaBuilder.get();
+    public String getTermoBusca() {
+        return termoBusca;
+    }
+
+    public void setTermoBusca(String termoBusca) {
+        this.termoBusca = termoBusca;
+    }
+
+    public String getTipoBusca() {
+        return tipoBusca;
+    }
+
+    public void setTipoBusca(String tipoBusca) {
+        this.tipoBusca = tipoBusca;
     }
 
     public List<Empresa> getEmpresas() {
-        if (ValidadorCollection.isListNotNullOrEmpty.validar(empresas))
-            return empresas;
-        empresas = empresaService.listarTodos();
         return empresas;
+    }
+
+    public void setEmpresas(List<Empresa> empresas) {
+        this.empresas = empresas;
     }
 }

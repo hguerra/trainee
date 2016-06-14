@@ -1,63 +1,48 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui" template="template/layout.xhtml">
+                template="template/layout.xhtml">
 
     <ui:define name="menu">
-        <h:form id="formProjetos">
-            <p:dataTable id="tabelaProjetos" value="#{projetoController.projetosEmAbertosNovos}"
-                         var="projeto" border="1">
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        Nome
-                    </f:facet>
-                    #{projeto.nome}
-                </p:column>
+        <div class="content">
+            <div class="properties-section">
+                <div class="container">
+                    <div class="properties-grids">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="home"
+                                 aria-labelledby="home-tab">
 
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        Descrição
-                    </f:facet>
-                    #{projeto.descricao}
-                </p:column>
+                                <ui:repeat var="projeto" value="#{projetoController.projetosEmAbertosNovos}">
 
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        Data Início
-                    </f:facet>
-                    #{projeto.getDataFormatada(projeto.dataInicio)}
-                </p:column>
+                                    <div class="forsale-grids">
+                                        <h4><a href="#">#{projeto.getDataFormatada(projeto.dataInicio)}</a></h4>
+                                        <div class="forsale1">
+                                            <div class="forsale-left">
+                                                <h:graphicImage value="/resources/images/lock_close.png"
+                                                                rendered="#{not empty projeto.dataTermino}"/>
+                                                <h:graphicImage value="/resources/images/lock_open.png"
+                                                                rendered="#{empty projeto.dataTermino}"/>
+                                            </div>
+                                            <div class="forsale-right">
+                                                <h5>#{projeto.nome}</h5>
+                                                <p>#{projeto.descricao}</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <ul>
+                                                <li>
+                                                    <span> Data Inicio </span> #{projeto.getDataFormatada(projeto.dataInicio)}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        Teste de botoes
-                    </f:facet>
-                    <p:commandButton value="Edit" icon="fa fa-fw fa-edit" type="button"/>
-                    <p:commandButton value="Remove" icon="fa fa-fw fa-remove" type="button"/>
-                    <p:commandButton value="Download" icon="fa fa-fw fa-download" type="button"/>
-                </p:column>
-            </p:dataTable>
-
-            <p:dataTable id="tabelaUsuarios" value="#{usuarioController.usuarios}"
-                         var="usuario" border="1">
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        Nome
-                    </f:facet>
-                    #{usuario.nome}
-                </p:column>
-
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        Imagem
-                    </f:facet>
-
-                    <p:graphicImage value="#{usuarioController.image}">
-                        <f:param name="usuarioNome" value="#{usuario.nome}"/>
-                    </p:graphicImage>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>

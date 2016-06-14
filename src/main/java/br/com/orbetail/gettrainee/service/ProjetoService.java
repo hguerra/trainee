@@ -21,4 +21,8 @@ public interface ProjetoService {
     List<Projeto> buscarProjetosRecentesEmAberto();
 
     List<Projeto> buscarCincoProjetosRecentesEmAberto();
+
+    List<Projeto> buscarProjetoPorNome(String termoBusca);
+
+    List<Projeto> buscarProjetoPorDescricao(String descricao);
 }

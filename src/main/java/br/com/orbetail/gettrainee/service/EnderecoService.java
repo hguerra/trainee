@@ -14,6 +14,8 @@ public interface EnderecoService {
 
     List<Cidade> listarCidadesEstado(Long estadoId);
 
+    List<Bairro> listarBairrosCidade(Long cidadeId);
+
     Bairro buscarBairro(Long cidadeId, String bairro);
 
     Rua buscarRua(Long bairroId, String rua);

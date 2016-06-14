@@ -13,18 +13,18 @@
                 <div class="modal-body real-spa">
                     <div class="login-grids">
                         <div class="login">
-
                             <div class="login-right">
-                                <h:form>
-                                    <h3>Login</h3>
+                                <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
+                                    <h:panelGroup id="login">
+                                        <h:outputText value="Usuário ou senha incorretos!" rendered="#{param.erro}"
+                                                      style="color: red"/>
+                                        <h3>Login</h3>
 
-                                    <h:inputText pt:placeholder="Entre com seu e-mail"/>
-                                    <h:inputSecret pt:placeholder="Senha"/>
-
-                                    <h4><h:commandLink value="Esqueceu sua senha?"/> / <h:commandLink
-                                            value="Criar uma nova senha"/></h4>
-                                    <h:commandButton value="Entrar agora"/>
-                                </h:form>
+                                        <h:inputText id="j_username" required="true" pt:placeholder="Login"/>
+                                        <h:inputSecret id="j_password" required="true" pt:placeholder="Senha"/>
+                                        <h:commandButton value="Entrar"/>
+                                    </h:panelGroup>
+                                </form>
                             </div>
                         </div>
                     </div>

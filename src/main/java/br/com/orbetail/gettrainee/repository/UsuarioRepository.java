@@ -17,6 +17,8 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
     Usuario findByNome(String nome);
 
+    Usuario findByLogin(String login);
+
     @Query("select usuario from Usuario as usuario where usuario.login = ?1 and usuario.senha = ?2")
     Usuario login(String login, String senha);
 
@@ -43,4 +45,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     List<Usuario> findByPais(String pais);
 
     Set<Usuario> findByPerfilsIn(Set<Perfil> perfils);
+
+
 }

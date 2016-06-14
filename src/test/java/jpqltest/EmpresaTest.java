@@ -1,5 +1,6 @@
 package jpqltest;
 
+import br.com.orbetail.gettrainee.model.Aluno;
 import br.com.orbetail.gettrainee.model.Empresa;
 import br.com.orbetail.gettrainee.model.Endereco;
 import br.com.orbetail.gettrainee.model.security.Perfil;
@@ -12,6 +13,7 @@ import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 /**
  * @author heitor

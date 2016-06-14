@@ -25,17 +25,33 @@
                                         <f:selectItem itemLabel="Cidade..."/>
                                         <f:selectItems value="#{alunoController.cidades}" var="cidade"
                                                        itemLabel="#{cidade.cidade}" itemValue="#{cidade.id}"/>
+                                        <f:ajax execute="@this" render="selectBairro"/>
                                     </h:selectOneMenu>
-                                    <h:inputText pt:placeholder="Bairro"/>
-                                    <h:inputText pt:placeholder="Rua"/>
-                                    <h:inputText pt:placeholder="Numero"/>
-                                    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true" label="Imagem"/>
+                                    <h:selectOneMenu id="selectBairro" styleClass="form-control"
+                                                     style="border-radius: 0; width: 50%"
+                                                     value="#{alunoController.idBairro}">
+                                        <f:selectItem itemLabel="Bairro..."/>
+                                        <f:selectItems value="#{alunoController.bairros}" var="bairro"
+                                                       itemLabel="#{bairro.bairro}" itemValue="#{bairro.id}"/>
+                                    </h:selectOneMenu>
+                                    <h:inputText pt:placeholder="Rua" value="#{alunoController.rua}"/>
+                                    <h:inputText pt:placeholder="Numero" value="#{alunoController.numero}"/>
 
+                                    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"
+                                                  label="Imagem"/>
 
-                                    <h:inputTextarea/>
-                                    <h:commandButton type="submit" value="Request" action="#{alunoController.onClickSubmit}"/>
+                                    <br/><br/>
+                                    <h:outputLabel for="ajax" value="Ajax:"/>
+                                    <p:inplace id="ajax" editor="true">
+                                        <p:inputText value="#{inplaceView.text}" required="true" label="text"/>
+                                    </p:inplace>
+                                    <br/><br/>
 
-                                    <h:outputText value="Selecione um cidade!" rendered="#{param.erro}" style="color: red"/>
+                                    <h:commandButton type="submit" value="Request"
+                                                     action="#{alunoController.cadastrarAluno}"/>
+
+                                    <h:outputText value="Selecione um cidade!" rendered="#{param.erro}"
+                                                  style="color: red"/>
                                 </div>
                                 <br/>
                             </h:form>

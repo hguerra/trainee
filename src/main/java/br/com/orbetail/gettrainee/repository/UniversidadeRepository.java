@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author heitor
@@ -20,4 +21,9 @@ public interface UniversidadeRepository extends CrudRepository<Universidade, Lon
     @Query("select cursos from Universidade universidade inner join universidade.cursos cursos where universidade.id " +
             "= ?1")
     List<Curso> findAllCursos(Long id);
+
+    List<Universidade> findByCursosIn(Set<Curso> cursos);
+
+    @Query("select cursos from Curso as cursos where upper(cursos.descricao) like %?1%")
+    Set<Curso> findCursosByDescricao(String descricao);
 }

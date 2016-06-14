@@ -24,4 +24,7 @@ public interface ProjetoRepository extends CrudRepository<Projeto, Long> {
             "desc")
     List<Projeto> findProjetosRecentesAbertos(Pageable pageable);
 
+    List<Projeto> findByNome(String nome);
+
+    List<Projeto> findByDescricaoContainingIgnoreCase(String descricao);
 }

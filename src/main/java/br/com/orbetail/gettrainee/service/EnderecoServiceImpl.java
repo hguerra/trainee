@@ -28,6 +28,11 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
+    public List<Bairro> listarBairrosCidade(Long cidadeId) {
+        return enderecoRepository.findByCidade(cidadeId);
+    }
+
+    @Override
     public Bairro buscarBairro(Long cidadeId, String bairro) {
         return enderecoRepository.findByBairro(cidadeId, bairro);
     }
